@@ -1,0 +1,18 @@
+position,parameter,mean,alpha,beta,concentration,n,status
+QB,completion_rate,0.6429137908860977,130.84794502448784,72.6753684887381,203.52331351322593,480,descriptive prior; not used by the empirical transition sampler
+QB,passing_td_rate,0.04522120289792944,24.98820042751161,527.5888834663747,552.5770838938863,480,descriptive prior; not used by the empirical transition sampler
+QB,interception_rate,0.022350709478286962,14.00034970583155,612.3936231312484,626.39397283708,480,descriptive prior; not used by the empirical transition sampler
+QB,rushing_td_rate,0.0515761900460663,10.88748387052694,200.20767187483867,211.09515574536562,137,descriptive prior; not used by the empirical transition sampler
+QB,lost_fumble_rate,0.005713743806159463,4.636687622699964,806.8606038207099,811.4972914434098,528,descriptive prior; not used by the empirical transition sampler
+RB,rushing_td_rate,0.031237293828557285,18.21398829768935,564.8707180041745,583.0847063018639,773,descriptive prior; not used by the empirical transition sampler
+RB,catch_rate,0.7696492649612223,127.175130557122,38.06264247385665,165.23777303097864,490,descriptive prior; not used by the empirical transition sampler
+RB,receiving_td_rate,0.040807721139430285,6.785238939812524,159.48817085508819,166.27340979490072,554,descriptive prior; not used by the empirical transition sampler
+RB,lost_fumble_rate,0.004793610532354984,4.793610532354984,995.2063894676451,1000.0,721,descriptive prior; not used by the empirical transition sampler
+TE,rushing_td_rate,0.06476683937823834,64.76683937823833,935.2331606217616,1000.0,5,descriptive prior; not used by the empirical transition sampler
+TE,catch_rate,0.6856877611016555,68.96287149817756,31.61187317478968,100.57474467296724,492,descriptive prior; not used by the empirical transition sampler
+TE,receiving_td_rate,0.07738201246660731,11.28254232107411,134.52062254159821,145.80316486267233,503,descriptive prior; not used by the empirical transition sampler
+TE,lost_fumble_rate,0.007136322049405307,7.136322049405306,992.8636779505947,1000.0,58,descriptive prior; not used by the empirical transition sampler
+WR,rushing_td_rate,0.05361930294906166,2.199298612428614,38.817620509365035,41.01691912179365,6,descriptive prior; not used by the empirical transition sampler
+WR,catch_rate,0.6263675171249876,35.96698572739846,21.454551539550007,57.42153726694846,1268,descriptive prior; not used by the empirical transition sampler
+WR,receiving_td_rate,0.07861381668064246,12.192596198007719,142.90222953139835,155.09482572940607,1200,descriptive prior; not used by the empirical transition sampler
+WR,lost_fumble_rate,0.005478246960972489,5.478246960972489,994.5217530390274,1000.0,264,descriptive prior; not used by the empirical transition sampler

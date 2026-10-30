@@ -1,0 +1,20 @@
+{
+  "training_target_seasons": [
+    2016,
+    2022
+  ],
+  "held_out_target_seasons": [
+    2023,
+    2024,
+    2025
+  ],
+  "draws_per_player": 256,
+  "seed": 20261030,
+  "neighbors": 40,
+  "elasticity": 0.5,
+  "hyperparameters": "predeclared; no holdout tuning",
+  "scope": "Incumbent player forecasts; does not evaluate rookie intake or a complete league.",
+  "identity": "Same player may appear in training and later holdout; only past data is used.",
+  "intervals": "Discrete outcomes can make empirical interval coverage exceed nominal levels.",
+  "scoring": "Full PPR, passing yards/25, passing TD=4, INT=-2, rush/rec yards/10, TD=6, offensive lost fumble=-2; no return/2pt points."
+}

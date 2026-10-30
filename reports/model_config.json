@@ -1,0 +1,7 @@
+{
+  "neighbors": 12,
+  "age_bandwidth": 3.0,
+  "jitter": 0.25,
+  "selection": "2019\u201322 forward-only distributional folds; zero jitter is an ablation, not eligible for procedural generation",
+  "development_score": 0.21947377016519576
+}

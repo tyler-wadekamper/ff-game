@@ -1,0 +1,9 @@
+position,metric,n,fixed_turning_age,early_log_slope,late_log_slope,residual_sd,upside_rms,downside_rms,status
+QB,ppr_per_game,228,30,-0.0951480265812629,-0.09772877011507865,0.45039017309271834,0.30578706671776384,0.596602981055054,"survivor-conditioned association, not causal aging or individual peak estimate"
+QB,opportunities_per_game,228,30,-0.10600605876335008,-0.056575702562038976,0.40137781122720506,0.20504806075805868,0.6687317885065065,"survivor-conditioned association, not causal aging or individual peak estimate"
+RB,ppr_per_game,419,27,-0.1755797666729257,-0.2816923834388363,0.533876722392164,0.43713121698315166,0.6363983871640316,"survivor-conditioned association, not causal aging or individual peak estimate"
+RB,opportunities_per_game,419,27,-0.17227612598969072,-0.2618417147060752,0.5104269902077195,0.3835474455429616,0.6557447332845295,"survivor-conditioned association, not causal aging or individual peak estimate"
+TE,ppr_per_game,309,29,-0.11521832984152482,-0.2684634410618158,0.472167591569263,0.41674253747303336,0.5352037678228102,"survivor-conditioned association, not causal aging or individual peak estimate"
+TE,opportunities_per_game,309,29,-0.09161192995035247,-0.23145479988883,0.39130441818022155,0.36219322034188256,0.42220048862105014,"survivor-conditioned association, not causal aging or individual peak estimate"
+WR,ppr_per_game,598,28,-0.10127460801720238,-0.24758391507772476,0.441704533995711,0.3605892699569421,0.527789783506701,"survivor-conditioned association, not causal aging or individual peak estimate"
+WR,opportunities_per_game,598,28,-0.06888607097396399,-0.2121769668100996,0.3419397341888231,0.27184162014994895,0.41808553086728417,"survivor-conditioned association, not causal aging or individual peak estimate"

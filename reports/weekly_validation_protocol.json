@@ -1,0 +1,16 @@
+{
+  "cutoff": 2022,
+  "years": [
+    2023,
+    2024,
+    2025
+  ],
+  "engine_fingerprint": "e23bd1b65b6d3b42b2fcff49b93176d52163d265ed5790d00e24d02e8405d657",
+  "draws_per_season": 20,
+  "paths_conserved": 15120,
+  "seasons": 756,
+  "same_player_templates": "excluded",
+  "calendar": "18 calendar weeks; one bye; exactly given participation count",
+  "scope": "Qualified single-team seasons with independently reconciled snaps and box scores",
+  "conditioning": "Season totals are deliberately known; variance/tails/timing are audited, not the tautological mean"
+}

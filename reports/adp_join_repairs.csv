@@ -1,0 +1,175 @@
+draft_year,source_rank,source_name,canonical_name,method
+2015,1,Le,Le'Veon Bell,exact_or_documented_alias
+2015,123,David Johnson,David Johnson,position_disambiguation
+2015,211,Alex Smith,Alex Smith,position_disambiguation
+2015,238,Marqise,Marqise Lee,exact_or_documented_alias
+2015,335,Ka,Ka'Deem Carey,exact_or_documented_alias
+2015,355,De,De'Anthony Thomas,exact_or_documented_alias
+2016,7,David Johnson,David Johnson,position_disambiguation
+2016,13,Le,Le'Veon Bell,exact_or_documented_alias
+2016,128,Michael Thomas,Michael Thomas,preseason_rookie_draft_capital
+2016,158,William Fuller,Will Fuller,exact_or_documented_alias
+2016,227,Robert Kelley,Rob Kelley,exact_or_documented_alias
+2016,234,Alex Smith,Alex Smith,position_disambiguation
+2016,245,Will,Will Tye,exact_or_documented_alias
+2016,270,Marqise,Marqise Lee,exact_or_documented_alias
+2016,278,Ka,Ka'Deem Carey,exact_or_documented_alias
+2016,314,Mike Thomas,Michael Thomas,preseason_rookie_draft_capital
+2016,430,Robbie Chosen,Robby Anderson,exact_or_documented_alias
+2016,484,Ryan Griffin,Ryan Griffin,position_disambiguation
+2016,531,Matt McGloin,Matthew McGloin,exact_or_documented_alias
+2016,536,James O,James O'Shaughnessy,exact_or_documented_alias
+2017,1,David Johnson,David Johnson,position_disambiguation
+2017,2,Le,Le'Veon Bell,exact_or_documented_alias
+2017,12,Michael Thomas,Michael Thomas,clearly_dominant_past_career_activity
+2017,80,Robert Kelley,Rob Kelley,exact_or_documented_alias
+2017,170,Robbie Chosen,Robby Anderson,exact_or_documented_alias
+2017,178,Marqise,Marqise Lee,exact_or_documented_alias
+2017,179,Chris Thompson,Chris Thompson,position_disambiguation
+2017,190,D,D'Onta Foreman,exact_or_documented_alias
+2017,225,De,De'Angelo Henderson Sr.,exact_or_documented_alias
+2017,234,William Fuller,Will Fuller,exact_or_documented_alias
+2017,245,Alex Smith,Alex Smith,position_disambiguation
+2017,287,Donnel Pumphrey,DJ Pumphrey,exact_or_documented_alias
+2017,368,De,De'Anthony Thomas,exact_or_documented_alias
+2017,406,Ryan Griffin,Ryan Griffin,position_disambiguation
+2018,2,Le,Le'Veon Bell,exact_or_documented_alias
+2018,3,David Johnson,David Johnson,position_disambiguation
+2018,11,dell Beckham Jr.,Odell Beckham,exact_or_documented_alias
+2018,16,Michael Thomas,Michael Thomas,clearly_dominant_past_career_activity
+2018,56,Greg lsen,Greg Olsen,exact_or_documented_alias
+2018,75,William Fuller V,Will Fuller,exact_or_documented_alias
+2018,89,Robbie Chosen,Robby Anderson,exact_or_documented_alias
+2018,105,Chris Thompson,Chris Thompson,position_disambiguation
+2018,112,Aaron Jones r.,Aaron Jones,exact_or_documented_alias
+2018,121,Alex Smith,Alex Smith,position_disambiguation
+2018,154,Mike Williams,Mike Williams,clearly_dominant_past_career_activity
+2018,167,.J. Howard,Jordan Howard,exact_or_documented_alias
+2018,199,D,D'Onta Foreman,exact_or_documented_alias
+2018,218,Robert Kelley,Rob Kelley,exact_or_documented_alias
+2018,240,Tre,Tre'Quan Smith,exact_or_documented_alias
+2018,277,Ryan Griffin,Ryan Griffin,position_disambiguation
+2018,317,J,J'Mon Moore,exact_or_documented_alias
+2018,478,De,De'Anthony Thomas,exact_or_documented_alias
+2018,481,Nick O,Nick O'Leary,exact_or_documented_alias
+2019,6,David Johnson,David Johnson,position_disambiguation
+2019,7,Le,Le'Veon Bell,exact_or_documented_alias
+2019,11,Michael Thomas,Michael Thomas,clearly_dominant_past_career_activity
+2019,75,Robbie Chosen,Robby Anderson,exact_or_documented_alias
+2019,85,William Fuller,Will Fuller,exact_or_documented_alias
+2019,189,N,N'Keal Harry,exact_or_documented_alias
+2019,197,Tre,Tre'Quan Smith,exact_or_documented_alias
+2019,225,Chris Thompson,Chris Thompson,position_disambiguation
+2019,249,Marqise,Marqise Lee,exact_or_documented_alias
+2019,318,D,D'Onta Foreman,exact_or_documented_alias
+2019,362,Mike Thomas,Michael Thomas,clearly_dominant_past_career_activity
+2019,415,De,De'Anthony Thomas,exact_or_documented_alias
+2019,448,Ryan Griffin,Ryan Griffin,position_disambiguation
+2019,514,Matthew Slater,Matt Slater,exact_or_documented_alias
+2019,520,Jacob Dolegala,Jake Dolegala,exact_or_documented_alias
+2019,559,Chandler,Chandler Cox,exact_or_documented_alias
+2019,584,Nick O,Nick O'Leary,exact_or_documented_alias
+2019,585,Roosevelt,Roosevelt Nix,exact_or_documented_alias
+2019,656,Damore,Damore'ea Stringfellow,exact_or_documented_alias
+2019,666,Joshua Perkins,Josh Perkins,exact_or_documented_alias
+2019,696,De,De'Angelo Henderson Sr.,exact_or_documented_alias
+2019,711,Cedrick Wilson Jr.,Ced Wilson,exact_or_documented_alias
+2019,738,Da,Da'Mari Scott,exact_or_documented_alias
+2019,774,James Williams,James Williams,position_disambiguation
+2019,784,Donnel Pumphrey,DJ Pumphrey,exact_or_documented_alias
+2019,812,Robert Kelley,Rob Kelley,exact_or_documented_alias
+2019,841,Ryan Griffin,Ryan Griffin,position_disambiguation
+2019,854,J,J'Mon Moore,exact_or_documented_alias
+2019,865,De,De'Lance Turner,exact_or_documented_alias
+2019,866,Temuchin Hodges,Bucky Hodges,exact_or_documented_alias
+2019,883,Khari,Khari Lee,exact_or_documented_alias
+2019,939,Will,Will Tye,exact_or_documented_alias
+2019,953,Tanner,Tanner Lee,exact_or_documented_alias
+2020,5,Michael Thomas,Michael Thomas,clearly_dominant_past_career_activity
+2020,31,dell Beckham Jr.,Odell Beckham,exact_or_documented_alias
+2020,37,Le,Le'Veon Bell,exact_or_documented_alias
+2020,74,William Fuller V,Will Fuller,exact_or_documented_alias
+2020,135,Robbie Chosen,Robby Anderson,exact_or_documented_alias
+2020,158,N,N'Keal Harry,exact_or_documented_alias
+2020,171,Chris Thompson,Chris Thompson,position_disambiguation
+2020,196,Ke,Ke'Shawn Vaughn,exact_or_documented_alias
+2020,212,.J. Howard,Jordan Howard,exact_or_documented_alias
+2020,281,Tre,Tre'Quan Smith,exact_or_documented_alias
+2020,288,La,La'Mical Perine,exact_or_documented_alias
+2020,325,Mike Thomas,Michael Thomas,clearly_dominant_past_career_activity
+2020,404,Deonte Harty,Deonte Harris,exact_or_documented_alias
+2020,468,P.J. Walker,Phillip Walker,exact_or_documented_alias
+2020,477,Matthew Slater,Matt Slater,exact_or_documented_alias
+2020,486,Ryan Griffin,Ryan Griffin,position_disambiguation
+2020,489,Cedrick Wilson Jr.,Ced Wilson,exact_or_documented_alias
+2020,491,Chandler,Chandler Cox,exact_or_documented_alias
+2020,517,Ryan Griffin,Ryan Griffin,position_disambiguation
+2020,536,D,D'Onta Foreman,exact_or_documented_alias
+2020,551,Gabe Davis,Gabriel Davis,exact_or_documented_alias
+2020,577,Roosevelt,Roosevelt Nix,exact_or_documented_alias
+2021,76,Robbie Chosen,Robby Anderson,exact_or_documented_alias
+2021,77,Michael Thomas,Michael Thomas,clearly_dominant_past_career_activity
+2021,107,William Fuller,Will Fuller,exact_or_documented_alias
+2021,195,Ty,Ty'Son Williams,exact_or_documented_alias
+2021,197,Gabe Davis,Gabriel Davis,exact_or_documented_alias
+2021,229,Tre,Tre'Quan Smith,exact_or_documented_alias
+2021,240,Le,Le'Veon Bell,exact_or_documented_alias
+2021,260,Joshua Palmer,Josh Palmer,exact_or_documented_alias
+2021,315,La,La'Mical Perine,exact_or_documented_alias
+2021,386,Dee Eskridge,D'Wayne Eskridge,exact_or_documented_alias
+2021,387,Ke,Ke'Shawn Vaughn,exact_or_documented_alias
+2021,391,De,De'Angelo Henderson Sr.,exact_or_documented_alias
+2021,392,Deonte Harty,Deonte Harris,exact_or_documented_alias
+2021,395,D,D'Onta Foreman,exact_or_documented_alias
+2021,411,N,N'Keal Harry,exact_or_documented_alias
+2021,431,James O,James O'Shaughnessy,exact_or_documented_alias
+2021,445,Michael Strachan,Mike Strachan,exact_or_documented_alias
+2022,66,Gabe Davis,Gabriel Davis,exact_or_documented_alias
+2022,75,Michael Thomas,Michael Thomas,clearly_dominant_past_career_activity
+2022,194,Joshua Palmer,Josh Palmer,exact_or_documented_alias
+2022,198,Robbie Chosen,Robby Anderson,exact_or_documented_alias
+2022,228,D,D'Onta Foreman,exact_or_documented_alias
+2022,279,Ke,Ke'Shawn Vaughn,exact_or_documented_alias
+2022,333,Cedrick Wilson Jr.,Ced Wilson,exact_or_documented_alias
+2023,100,Michael Thomas,Michael Thomas,clearly_dominant_past_career_activity
+2023,102,Gabe Davis,Gabriel Davis,exact_or_documented_alias
+2023,150,Chig Okonkwo,Chigoziem Okonkwo,exact_or_documented_alias
+2023,197,D,D'Onta Foreman,exact_or_documented_alias
+2023,300,Joshua Palmer,Josh Palmer,exact_or_documented_alias
+2023,408,Le,Le'Veon Bell,exact_or_documented_alias
+2023,429,D,D'vonte Price,exact_or_documented_alias
+2023,436,Tre,Tre' McKitty,exact_or_documented_alias
+2023,439,Matthew Slater,Matt Slater,exact_or_documented_alias
+2023,457,Cedrick Wilson Jr.,Ced Wilson,exact_or_documented_alias
+2023,500,Mitch Tinsley,Mitchell Tinsley,exact_or_documented_alias
+2023,554,Dee Eskridge,D'Wayne Eskridge,exact_or_documented_alias
+2023,577,Josh Johnson,Josh Johnson,position_disambiguation
+2023,583,Tre,Tre'Quan Smith,exact_or_documented_alias
+2024,150,Joshua Palmer,Josh Palmer,exact_or_documented_alias
+2024,162,Gabe Davis,Gabriel Davis,exact_or_documented_alias
+2024,206,Chig Okonkwo,Chigoziem Okonkwo,exact_or_documented_alias
+2024,325,D,D'Onta Foreman,exact_or_documented_alias
+2024,398,Ty,Ty'Son Williams,exact_or_documented_alias
+2024,472,Josh Johnson,Josh Johnson,position_disambiguation
+2024,522,Frank Gore Jr.,Frank Gore,clearly_dominant_past_career_activity
+2024,545,Rodney Williams,Rod Williams,exact_or_documented_alias
+2024,549,Matthew Slater,Matt Slater,exact_or_documented_alias
+2024,575,Jha,Jha'Quan Jackson,exact_or_documented_alias
+2024,591,Deonte Harty,Deonte Harris,exact_or_documented_alias
+2024,644,P.J. Walker,Phillip Walker,exact_or_documented_alias
+2024,652,Cedrick Wilson Jr.,Ced Wilson,exact_or_documented_alias
+2024,662,Michael Thomas,Michael Thomas,clearly_dominant_past_career_activity
+2024,670,Nick Westbrook-Ikhine,Nick Westbrook,exact_or_documented_alias
+2024,674,Tre,Tre' McKitty,exact_or_documented_alias
+2024,675,Dee Eskridge,D'Wayne Eskridge,exact_or_documented_alias
+2024,705,Robbie Chosen,Robby Anderson,exact_or_documented_alias
+2024,730,N,N'Keal Harry,exact_or_documented_alias
+2024,760,La,La'Mical Perine,exact_or_documented_alias
+2024,765,Ke,Ke'Shawn Vaughn,exact_or_documented_alias
+2024,793,Michael Woods,Mike Woods,exact_or_documented_alias
+2024,835,Josh,Josh Ali,exact_or_documented_alias
+2024,854,Tre,Tre'Shaun Harrison,exact_or_documented_alias
+2024,901,Michael Strachan,Mike Strachan,exact_or_documented_alias
+2024,925,Jalen Cropper,Jalen Moreno-Cropper,exact_or_documented_alias
+2024,945,Mitch Tinsley,Mitchell Tinsley,exact_or_documented_alias
+2024,946,La,La'Michael Pettway,exact_or_documented_alias

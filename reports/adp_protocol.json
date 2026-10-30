@@ -1,0 +1,42 @@
+{
+  "source_years": [
+    2015,
+    2024
+  ],
+  "training_years": [
+    2016,
+    2022
+  ],
+  "audit_years": [
+    2023,
+    2024
+  ],
+  "selected_neighbors": 12,
+  "features": [
+    "age",
+    "visible_years",
+    "last_ppr17",
+    "last_ppg",
+    "last_games",
+    "mean2",
+    "mean3",
+    "max3",
+    "trend",
+    "attempts_pg",
+    "carries_pg",
+    "targets_pg",
+    "passing_ypg",
+    "rushing_ypg",
+    "receiving_ypg",
+    "td_pg",
+    "out_weeks",
+    "mean_participation",
+    "years_since_last",
+    "no_history"
+  ],
+  "censoring_at_eligible_pick": 216,
+  "format": "Overall FantasyPros consensus archive; scoring/league-size not certified",
+  "tail": "Ranks beyond observed support are extrapolated queue positions, not measured historical ADPs",
+  "draft_noise": "Declared game-room log-score SD: .12 top24, .18 top120, .25 beyond; not empirically claimed",
+  "spacing": "Observed consensus ADP curve calibrates spacing; independently held-out audit evaluates ordering"
+}

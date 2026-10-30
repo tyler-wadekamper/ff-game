@@ -1,0 +1,25 @@
+{
+  "name": "fourth-and-forever",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node game/server.mjs",
+    "dev": "node --watch game/server.mjs",
+    "test": "node --test game/tests/*.test.mjs",
+    "test:browser": "node game/tests/browser.cjs",
+    "validate:game": "node game/tests/simulate.mjs",
+    "data:game": ".venv/bin/python -m ffsim.game_export",
+    "format:check": "prettier --check \"game/**/*.{mjs,cjs}\" \"game/public/*.{js,css,html,webmanifest}\"",
+    "build:static": "node game/build-static.mjs",
+    "test:static": "node game/tests/static-browser.cjs",
+    "publish:pages": "node game/publish-pages.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "prettier": "3.6.2"
+  }
+}

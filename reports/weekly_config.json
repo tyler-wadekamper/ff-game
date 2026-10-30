@@ -1,0 +1,10 @@
+{
+  "shape_retention": {
+    "QB": 0.9837538962803526,
+    "RB": 0.9053319864043432,
+    "WR": 0.795048870970995,
+    "TE": 0.7102149504886018
+  },
+  "calibration": "Two method-of-moments CV correction passes, 2021\u201322 only, templates through 2020",
+  "engine_fingerprint": "e23bd1b65b6d3b42b2fcff49b93176d52163d265ed5790d00e24d02e8405d657"
+}

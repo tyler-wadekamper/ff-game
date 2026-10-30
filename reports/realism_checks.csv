@@ -1,0 +1,70 @@
+check,position,value,limit,passed,description
+mean_rank_curve_score_error,QB,0.14665346577847468,<=4,True,Mean absolute difference over ranks 1–100 on fixed score scale
+top12_mean_score_error,QB,0.40759560040410736,<=8,True,Elite population production; fixed training-based scale
+independent_seed_batches,QB,0.17222844969140644,<=3,True,Odd/even replicate rank curves agree
+active_pool_zero_fraction_error,QB,0.003060336142897524,<=0.03,True,Zero offensive production among rostered players; unrostered players excluded
+total_opportunity_budget_error,QB,0.0009365834148074015,<=0.05,True,Position opportunity volume versus modern empirical population
+history_remains_informative,QB,38.91528219037037,>=15 and ordered,True,Previous low/mid/high producers have ordered next-season distributions
+history_rank_relationship,QB,0.8350114329613689,>=0.5,True,"History affects conditional allocation, not just final marginal histograms"
+realized_rank_persistence,QB,0.576234583277062,"[0.418,0.783]",True,"Realized season rank correlation, not correlation with an averaged forecast"
+bust_fraction,QB,0.41900000000000004,"[0.211,0.459]",True,Current PPR>30; historical annual range plus five percentage points
+breakout_fraction,QB,0.16540000000000002,"[0.041,0.217]",True,Current PPR>30; historical annual range plus five percentage points
+incumbent_dropout_historical_range,QB,0.1188,"[0.033,0.166]",True,No-production seasons among prior PPR>30; historical annual range plus 3 percentage points
+mean_rank_curve_score_error,RB,0.228144464298941,<=4,True,Mean absolute difference over ranks 1–100 on fixed score scale
+top12_mean_score_error,RB,0.45894299548298506,<=8,True,Elite population production; fixed training-based scale
+independent_seed_batches,RB,0.3998078624442598,<=3,True,Odd/even replicate rank curves agree
+active_pool_zero_fraction_error,RB,0.0030701230803184543,<=0.03,True,Zero offensive production among rostered players; unrostered players excluded
+total_opportunity_budget_error,RB,0.0003128382034631727,<=0.05,True,Position opportunity volume versus modern empirical population
+history_remains_informative,RB,32.30098478394303,>=15 and ordered,True,Previous low/mid/high producers have ordered next-season distributions
+history_rank_relationship,RB,0.9261106576271256,>=0.5,True,"History affects conditional allocation, not just final marginal histograms"
+realized_rank_persistence,RB,0.5803793107858438,"[0.403,0.813]",True,"Realized season rank correlation, not correlation with an averaged forecast"
+bust_fraction,RB,0.385,"[0.279,0.487]",True,Current PPR>30; historical annual range plus five percentage points
+breakout_fraction,RB,0.15280487804878048,"[0.054,0.239]",True,Current PPR>30; historical annual range plus five percentage points
+incumbent_dropout_historical_range,RB,0.1203658536585366,"[0.076,0.159]",True,No-production seasons among prior PPR>30; historical annual range plus 3 percentage points
+mean_rank_curve_score_error,WR,0.23484021628914506,<=4,True,Mean absolute difference over ranks 1–100 on fixed score scale
+top12_mean_score_error,WR,0.012181210875246307,<=8,True,Elite population production; fixed training-based scale
+independent_seed_batches,WR,0.34537320024038387,<=3,True,Odd/even replicate rank curves agree
+active_pool_zero_fraction_error,WR,0.001775571989680702,<=0.03,True,Zero offensive production among rostered players; unrostered players excluded
+total_opportunity_budget_error,WR,0.00020584562553649377,<=0.05,True,Position opportunity volume versus modern empirical population
+history_remains_informative,WR,37.85774756215004,>=15 and ordered,True,Previous low/mid/high producers have ordered next-season distributions
+history_rank_relationship,WR,0.9254543940024111,>=0.5,True,"History affects conditional allocation, not just final marginal histograms"
+realized_rank_persistence,WR,0.6566290926793124,"[0.519,0.840]",True,"Realized season rank correlation, not correlation with an averaged forecast"
+bust_fraction,WR,0.364,"[0.288,0.440]",True,Current PPR>30; historical annual range plus five percentage points
+breakout_fraction,WR,0.1562222222222222,"[0.016,0.249]",True,Current PPR>30; historical annual range plus five percentage points
+incumbent_dropout_historical_range,WR,0.13207407407407407,"[0.055,0.193]",True,No-production seasons among prior PPR>30; historical annual range plus 3 percentage points
+mean_rank_curve_score_error,TE,0.17422718103087328,<=4,True,Mean absolute difference over ranks 1–100 on fixed score scale
+top12_mean_score_error,TE,0.07529648024154369,<=8,True,Elite population production; fixed training-based scale
+independent_seed_batches,TE,0.22593454120151477,<=3,True,Odd/even replicate rank curves agree
+active_pool_zero_fraction_error,TE,0.00031306527412700014,<=0.03,True,Zero offensive production among rostered players; unrostered players excluded
+total_opportunity_budget_error,TE,0.0025337481543978857,<=0.05,True,Position opportunity volume versus modern empirical population
+history_remains_informative,TE,26.15227353751029,>=15 and ordered,True,Previous low/mid/high producers have ordered next-season distributions
+history_rank_relationship,TE,0.9454710449034742,>=0.5,True,"History affects conditional allocation, not just final marginal histograms"
+realized_rank_persistence,TE,0.5045398315405628,"[0.435,0.793]",True,"Realized season rank correlation, not correlation with an averaged forecast"
+bust_fraction,TE,0.35890625,"[0.256,0.447]",True,Current PPR>30; historical annual range plus five percentage points
+breakout_fraction,TE,0.12875,"[0.044,0.214]",True,Current PPR>30; historical annual range plus five percentage points
+incumbent_dropout_historical_range,TE,0.10515625,"[0.019,0.151]",True,No-production seasons among prior PPR>30; historical annual range plus 3 percentage points
+no_runaway_qb_workloads,QB,748.0,<=850 in tested sample,True,Stress guard far above an ordinary season; not a hard cap in the generator
+non_deterministic_player_seasons,QB-003,133.25605571995595,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,QB-003,90.0,>=10,True,Within-season bootstrap creates new box-score vectors
+non_deterministic_player_seasons,QB-018,92.71253068620229,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,QB-018,95.0,>=10,True,Within-season bootstrap creates new box-score vectors
+non_deterministic_player_seasons,QB-031,65.97686691682169,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,QB-031,60.0,>=10,True,Within-season bootstrap creates new box-score vectors
+non_deterministic_player_seasons,RB-005,69.23196414229486,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,RB-005,100.0,>=10,True,Within-season bootstrap creates new box-score vectors
+non_deterministic_player_seasons,RB-024,79.17210650702683,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,RB-024,89.0,>=10,True,Within-season bootstrap creates new box-score vectors
+non_deterministic_player_seasons,RB-056,72.64298394201604,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,RB-056,88.0,>=10,True,Within-season bootstrap creates new box-score vectors
+non_deterministic_player_seasons,WR-007,73.11113346980746,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,WR-007,100.0,>=10,True,Within-season bootstrap creates new box-score vectors
+non_deterministic_player_seasons,WR-041,51.385005556095834,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,WR-041,95.0,>=10,True,Within-season bootstrap creates new box-score vectors
+non_deterministic_player_seasons,WR-088,59.13121426116667,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,WR-088,94.0,>=10,True,Within-season bootstrap creates new box-score vectors
+non_deterministic_player_seasons,TE-003,81.36692438577238,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,TE-003,83.0,>=10,True,Within-season bootstrap creates new box-score vectors
+non_deterministic_player_seasons,TE-019,57.72361952441999,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,TE-019,96.0,>=10,True,Within-season bootstrap creates new box-score vectors
+non_deterministic_player_seasons,TE-043,36.31211401171791,>=10 PPR,True,Same history supports materially different outcomes
+novel_positive_stat_lines,TE-043,96.0,>=10,True,Within-season bootstrap creates new box-score vectors

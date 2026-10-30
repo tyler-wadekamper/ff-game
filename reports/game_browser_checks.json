@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "weeksPlayed": 18,
+  "desktop": [
+    1440,
+    1050
+  ],
+  "mobile": [
+    390,
+    844
+  ],
+  "queueManualAutoDraft": true,
+  "lineupChanges": true,
+  "waiverBudgetAndOwnership": true,
+  "reloadResume": true,
+  "mobileNavigation": true,
+  "champion": true,
+  "jsErrors": [],
+  "httpErrors": []
+}

@@ -1,0 +1,11 @@
+{
+  "engine_fingerprint": "5061861a655a3820ae78e4c7ec43750c053d9218982fe4c22a410f9aba8abf63",
+  "replicates_per_year": 64,
+  "training_cutoff": 2022,
+  "audit_years": [
+    2023,
+    2024,
+    2025
+  ],
+  "status": "Reused historical audit; not an untouched test set"
+}

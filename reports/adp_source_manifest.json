@@ -1,0 +1,72 @@
+{
+  "source": "jughkoop/fantasy-football-adps",
+  "commit": "62009bf51773d37427da4e07c99d90339ff6e152",
+  "upstream": "FantasyPros overall consensus",
+  "format": "Archive does not certify scoring format or league size; not claimed to be pure PPR",
+  "coverage": [
+    2015,
+    2024
+  ],
+  "files": {
+    "FantasyPros_2015_Overall_ADP_Rankings.csv": {
+      "url": "https://raw.githubusercontent.com/jughkoop/fantasy-football-adps/62009bf51773d37427da4e07c99d90339ff6e152/FantasyPros_2015_Overall_ADP_Rankings.csv",
+      "sha256": "9f62a10b49749e6854867e7e37510f452aa4821d3de93b3ba87068c13233a949",
+      "bytes": 31017,
+      "retrieved_at": "2026-10-30T22:27:03.086125+00:00"
+    },
+    "FantasyPros_2016_Overall_ADP_Rankings.csv": {
+      "url": "https://raw.githubusercontent.com/jughkoop/fantasy-football-adps/62009bf51773d37427da4e07c99d90339ff6e152/FantasyPros_2016_Overall_ADP_Rankings.csv",
+      "sha256": "9008ca12dfc743d039abbd237e57e7ee7470fd17c6d22231b5740cf8018832c3",
+      "bytes": 35433,
+      "retrieved_at": "2026-10-30T22:27:03.328805+00:00"
+    },
+    "FantasyPros_2017_Overall_ADP_Rankings.csv": {
+      "url": "https://raw.githubusercontent.com/jughkoop/fantasy-football-adps/62009bf51773d37427da4e07c99d90339ff6e152/FantasyPros_2017_Overall_ADP_Rankings.csv",
+      "sha256": "89fb16feb9953a8726f96d70c99ea1f08e4299eb6f8b9fe02e767be12e058ddc",
+      "bytes": 27339,
+      "retrieved_at": "2026-10-30T22:27:03.583726+00:00"
+    },
+    "FantasyPros_2018_Overall_ADP_Rankings.csv": {
+      "url": "https://raw.githubusercontent.com/jughkoop/fantasy-football-adps/62009bf51773d37427da4e07c99d90339ff6e152/FantasyPros_2018_Overall_ADP_Rankings.csv",
+      "sha256": "b14e5eb8cc8782a3e18569243180bf17cb72f6a8526e3a7ea3c7805441db8e31",
+      "bytes": 33608,
+      "retrieved_at": "2026-10-30T22:27:03.892220+00:00"
+    },
+    "FantasyPros_2019_Overall_ADP_Rankings.csv": {
+      "url": "https://raw.githubusercontent.com/jughkoop/fantasy-football-adps/62009bf51773d37427da4e07c99d90339ff6e152/FantasyPros_2019_Overall_ADP_Rankings.csv",
+      "sha256": "c7089b1b1c6a5c2da304ef1b1aa3478efe4afb4805e33bad93f0adb1a9d9c8d3",
+      "bytes": 72208,
+      "retrieved_at": "2026-10-30T22:27:04.191939+00:00"
+    },
+    "FantasyPros_2020_Overall_ADP_Rankings.csv": {
+      "url": "https://raw.githubusercontent.com/jughkoop/fantasy-football-adps/62009bf51773d37427da4e07c99d90339ff6e152/FantasyPros_2020_Overall_ADP_Rankings.csv",
+      "sha256": "fe283b3e1ac0c7527248fb084fa59bd5784cc11bbda04414342d06804ef412c7",
+      "bytes": 40363,
+      "retrieved_at": "2026-10-30T22:27:04.480188+00:00"
+    },
+    "FantasyPros_2021_Overall_ADP_Rankings.csv": {
+      "url": "https://raw.githubusercontent.com/jughkoop/fantasy-football-adps/62009bf51773d37427da4e07c99d90339ff6e152/FantasyPros_2021_Overall_ADP_Rankings.csv",
+      "sha256": "c56f1196c06f5ebb155b27bc75a764e63cbd42be9271654b27af4f17044995b5",
+      "bytes": 35754,
+      "retrieved_at": "2026-10-30T22:27:04.741715+00:00"
+    },
+    "FantasyPros_2022_Overall_ADP_Rankings.csv": {
+      "url": "https://raw.githubusercontent.com/jughkoop/fantasy-football-adps/62009bf51773d37427da4e07c99d90339ff6e152/FantasyPros_2022_Overall_ADP_Rankings.csv",
+      "sha256": "2931142455c43f198e74a0ba87f3d3b42a51f5e6073b993ff08246b87b10fb01",
+      "bytes": 25728,
+      "retrieved_at": "2026-10-30T22:27:05.012389+00:00"
+    },
+    "FantasyPros_2023_Overall_ADP_Rankings.csv": {
+      "url": "https://raw.githubusercontent.com/jughkoop/fantasy-football-adps/62009bf51773d37427da4e07c99d90339ff6e152/FantasyPros_2023_Overall_ADP_Rankings.csv",
+      "sha256": "ef0ca929e3fb0fcaa18638d897ee7899af24964e4a1f2695c2524d5852992c60",
+      "bytes": 42407,
+      "retrieved_at": "2026-10-30T22:27:05.278088+00:00"
+    },
+    "FantasyPros_2024_Overall_ADP_Rankings.csv": {
+      "url": "https://raw.githubusercontent.com/jughkoop/fantasy-football-adps/62009bf51773d37427da4e07c99d90339ff6e152/FantasyPros_2024_Overall_ADP_Rankings.csv",
+      "sha256": "dd992f028970a88a8f6ae0fc550df2f7d18fa777e08d4fb3ec66ee037c24a493",
+      "bytes": 68115,
+      "retrieved_at": "2026-10-30T22:27:05.390424+00:00"
+    }
+  }
+}

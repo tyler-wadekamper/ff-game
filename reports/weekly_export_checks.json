@@ -1,0 +1,16 @@
+{
+  "players_per_season": {
+    "1": 1166,
+    "2": 1166,
+    "3": 1223
+  },
+  "engine_fingerprint": "e23bd1b65b6d3b42b2fcff49b93176d52163d265ed5790d00e24d02e8405d657",
+  "weekly_rows": 127980,
+  "calendars": 7110,
+  "weekly_paths_per_season": 2,
+  "all_stat_totals_conserved": true,
+  "all_calendars_18_weeks": true,
+  "one_bye_each": true,
+  "no_bye_production": true,
+  "same_group_same_bye": true
+}
