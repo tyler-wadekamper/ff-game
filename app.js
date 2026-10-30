@@ -141,7 +141,7 @@ function setupForm() {
 }
 function welcome() {
   $('#app').innerHTML =
-    `<main class="welcome" id="main"><div class="welcome-top"><div class="brand-mark">F</div><div class="brand">FOURTH &<br>FOREVER</div></div><div class="welcome-grid"><div><p class="eyebrow">THE SINGLE-PLAYER FANTASY FOOTBALL SIM</p><h1>A whole season.<br><em>Your call.</em></h1><p class="lead">Build your team. Outsmart eleven managers. Turn a draft-day hunch into a championship, one Sunday at a time.</p><div class="pills"><span>12 teams · full PPR</span><span>972 fictional players</span><span>Play at your pace</span></div><p class="footnote">History gives you clues. The next season is yours to discover.</p></div><div class="card setup"><h2>Your franchise starts here.</h2>${setupForm()}<p class="footnote">No account or payment needed for this prototype. ${browserMode ? 'Your league saves on this device. Export a recovery file before clearing browser data.' : 'Your league saves automatically in this browser and on this server. An internet connection is required to play.'}</p>${saved().length ? '<button class="text-link" data-settings>Resume a saved league →</button>' : ''}</div></div></main>`;
+    `<main class="welcome" id="main"><div class="welcome-top"><div class="brand-mark">F</div><div class="brand">FOURTH &<br>FOREVER</div></div><div class="welcome-grid"><div><p class="eyebrow">THE SINGLE-PLAYER FANTASY FOOTBALL SIM</p><h1>A whole season.<br><em>Your call.</em></h1><p class="lead">Build your team. Outsmart eleven managers. Turn a draft-day hunch into a championship, one Sunday at a time.</p><div class="actions" style="margin-top:24px"><button class="btn primary" type="button" data-quick-start data-create>Start a season →</button><span class="muted" style="font-size:11px">Jump straight into the draft</span></div><div class="pills"><span>12 teams · full PPR</span><span>972 fictional players</span><span>Play at your pace</span></div><p class="footnote">History gives you clues. The next season is yours to discover.</p></div><div class="card setup"><h2>Your franchise starts here.</h2>${setupForm()}<p class="footnote">No account or payment needed for this prototype. ${browserMode ? 'Your league saves on this device. Export a recovery file before clearing browser data.' : 'Your league saves automatically in this browser and on this server. An internet connection is required to play.'}</p>${saved().length ? '<button class="text-link" data-settings>Resume a saved league →</button>' : ''}</div></div></main>`;
 }
 async function create() {
   if (busy) return;
@@ -618,6 +618,10 @@ document.addEventListener('click', async (event) => {
   const d = el.dataset;
   if ('close' in d) {
     closeDialog();
+    return;
+  }
+  if ('quickStart' in d) {
+    await create();
     return;
   }
   if ('settings' in d) {
