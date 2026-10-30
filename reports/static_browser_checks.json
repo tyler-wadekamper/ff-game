@@ -1,6 +1,9 @@
 {
   "passed": true,
   "subdirectory": "/ff-game/",
+  "source": "main/root",
+  "sourceAndPublishingFilesIdentical": true,
+  "visibleQuickStart": true,
   "weeksPlayedOffline": 18,
   "fullDraft": true,
   "saveReload": true,

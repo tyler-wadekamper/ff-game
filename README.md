@@ -2,6 +2,8 @@
 
 ## Play the game
 
+**[Play Fourth & Forever in your browser](https://tyler-wadekamper.github.io/ff-game/)** — press **Start a season** to enter the draft immediately. The repository root includes the runnable browser build so GitHub Pages opens the game directly.
+
 For free public hosting, use the [browser edition and GitHub Pages publisher](docs/FREE_HOSTING.md). It runs the same game entirely on the player's device, supports offline play and full backup export/import. The Node server below remains available for server-owned saves and private outcomes.
 
 **Fourth & Forever** is now a playable browser game built on this player model. Draft against eleven different managers, set your lineup, compete for an eighteen-week season, bid on waivers and chase the championship. The layout supports desktop and phones, with an installable PWA shell.

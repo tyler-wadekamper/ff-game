@@ -10,17 +10,18 @@ Browser owners can inspect the bundled football outcomes with developer tools. T
 
 ```sh
 npm run build:static
+npm run build:pages
 npm run test:static
 npm run publish:pages
 ```
 
-The publisher uploads only the generated site to the `gh-pages` branch, without force-pushing or altering the source checkout. It contains the fictional catalog, twelve packaged worlds, game engine and interface; no local league saves or credentials are included. `_site/` is generated and ignored by Git.
+`build:pages` copies the generated browser edition to the source repository root, including a real `index.html` and `.nojekyll`. Commit these generated root files with source updates so **main / (root)** opens the game directly rather than rendering the README. The publisher also refreshes those root files and uploads the same playable site to `gh-pages`, without force-pushing. Both publishing branches therefore support the same direct game URL. They contain the fictional catalog, twelve packaged worlds, game engine and interface; no local league saves or credentials are included. `_site/` is generated and ignored by Git.
 
 For first-time GitHub Pages activation, a repository administrator may need to open:
 
 https://github.com/tyler-wadekamper/ff-game/settings/pages
 
-Choose **Deploy from a branch → gh-pages → /(root) → Save**. GitHub's Pages deployment then serves:
+Choose **Deploy from a branch → main or gh-pages → /(root) → Save**. Both branches have a runnable entry page. GitHub's Pages deployment then serves:
 
 https://tyler-wadekamper.github.io/ff-game/
 

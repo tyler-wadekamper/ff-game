@@ -42,7 +42,7 @@ const { chromium } = require('playwright');
     await page.screenshot({ path: path.join(root, 'artifacts/game_welcome.png'), fullPage: true });
     await page.fill('#team-name', 'Sunday Test Club');
     await page.selectOption('#draft-slot', '6');
-    await page.locator('[data-create]').click();
+    await page.locator('#setup-form [data-create]').click();
     await page.waitForSelector('[data-draft]');
     await wait();
     let s = await state();

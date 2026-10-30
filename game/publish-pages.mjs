@@ -1,14 +1,14 @@
-// Publish the generated browser edition without changing the source checkout.
-// GitHub Pages must use gh-pages / (root); no paid hosting or server is required.
+// Publish the same playable browser edition on main/(root) and gh-pages/(root).
+// Generated source-root files must also be committed and pushed to main.
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { buildStatic } from './build-static.mjs';
+import { preparePagesRoot } from './prepare-pages.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const site = await buildStatic();
+const site = await preparePagesRoot();
 const git = (args, options = {}) =>
   execFileSync('git', args, { cwd: root, encoding: 'utf8', ...options }).trim();
 const gitDir = git(['rev-parse', '--absolute-git-dir']);

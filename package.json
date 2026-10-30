@@ -13,7 +13,8 @@
     "format:check": "prettier --check \"game/**/*.{mjs,cjs}\" \"game/public/*.{js,css,html,webmanifest}\"",
     "build:static": "node game/build-static.mjs",
     "test:static": "node game/tests/static-browser.cjs",
-    "publish:pages": "node game/publish-pages.mjs"
+    "publish:pages": "node game/publish-pages.mjs",
+    "build:pages": "node game/prepare-pages.mjs"
   },
   "engines": {
     "node": ">=22"

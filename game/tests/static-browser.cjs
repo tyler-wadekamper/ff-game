@@ -7,8 +7,18 @@ const { chromium } = require('playwright');
 
 (async () => {
   const root = path.resolve(__dirname, '../..');
-  const { buildStatic } = await import(pathToFileURL(path.join(root, 'game/build-static.mjs')));
-  const site = await buildStatic();
+  const { preparePagesRoot } = await import(
+    pathToFileURL(path.join(root, 'game/prepare-pages.mjs'))
+  );
+  const built = await preparePagesRoot();
+  // Test the source branch too: Pages must launch index.html rather than README.md.
+  const site = process.env.PAGES_FROM_SOURCE === '1' ? root : built;
+  for (const name of await fs.readdir(built)) {
+    assert.deepEqual(
+      await fs.readFile(path.join(root, name)),
+      await fs.readFile(path.join(built, name)),
+    );
+  }
   const types = {
     '.html': 'text/html',
     '.js': 'text/javascript',
@@ -75,9 +85,14 @@ const { chromium } = require('playwright');
       });
     await page.goto(base, { waitUntil: 'networkidle' });
     await page.waitForSelector('#team-name');
+    assert.equal(await page.locator('[data-quick-start]').count(), 1);
+    const start = await page.locator('[data-quick-start]').boundingBox();
+    assert.ok(
+      start.y >= 0 && start.y + start.height <= 844,
+      'Start button must be visible without scrolling',
+    );
     assert.match(await page.locator('.footnote').last().textContent(), /device/);
-    await page.fill('#team-name', 'Pages Playtest');
-    await page.locator('[data-create]').click();
+    await page.locator('[data-quick-start]').click();
     await page.waitForSelector('[data-draft]');
     await wait();
     await page.locator('[data-draft]').first().click();
@@ -163,6 +178,9 @@ const { chromium } = require('playwright');
         {
           passed: true,
           subdirectory: '/ff-game/',
+          source: process.env.PAGES_FROM_SOURCE === '1' ? 'main/root' : 'generated build',
+          sourceAndPublishingFilesIdentical: true,
+          visibleQuickStart: true,
           weeksPlayedOffline: 18,
           fullDraft: true,
           saveReload: true,
