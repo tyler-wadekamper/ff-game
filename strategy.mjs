@@ -1,4 +1,5 @@
 // Decision functions receive visible information only, never a season world.
+import { ROSTER_SIZE } from './config.mjs';
 export const SLOTS = ['QB', 'RB', 'RB', 'WR', 'WR', 'TE', 'FLEX', 'FLEX'];
 export const POSITIONS = ['QB', 'RB', 'WR', 'TE'];
 export const MINIMUM = { QB: 1, RB: 2, WR: 2, TE: 1 };
@@ -106,19 +107,31 @@ export function rosterComplete(ids, players) {
   return POSITIONS.every((p) => n[p] >= MINIMUM[p]) && n.RB + n.WR + n.TE >= 7;
 }
 export function canDraft(roster, player, players) {
-  if (roster.length >= 16 || roster.includes(player.id)) return false;
-  const n = counts([...roster, player.id], players);
+  if (roster.length >= ROSTER_SIZE || roster.includes(player.id)) return false;
+  return rosterFeasible([...roster, player.id], players);
+}
+export function rosterFeasible(roster, players) {
+  if (roster.length > ROSTER_SIZE) return false;
+  const n = counts(roster, players);
   if (n.QB > 3 || n.TE > 4) return false;
   const missingSkills = Math.max(
     Math.max(0, 2 - n.RB) + Math.max(0, 2 - n.WR) + Math.max(0, 1 - n.TE),
     7 - n.RB - n.WR - n.TE,
   );
-  return Math.max(0, 1 - n.QB) + missingSkills <= 15 - roster.length;
+  return Math.max(0, 1 - n.QB) + missingSkills <= ROSTER_SIZE - roster.length;
 }
 export function canSwap(roster, add, drop, players) {
   if (!players.has(add) || !roster.includes(drop) || roster.includes(add)) return false;
   const after = roster.filter((id) => id !== drop).concat(add);
-  return rosterComplete(after, players) && counts(after, players).QB <= 3;
+  return rosterFeasible(after, players);
+}
+export function canAcquire(roster, add, drop, players) {
+  return (
+    players.has(add) &&
+    (drop === null || drop === undefined
+      ? canDraft(roster, players.get(add), players)
+      : canSwap(roster, add, drop, players))
+  );
 }
 export function forecast(player, observed = {}) {
   const record = observed[player.id];
