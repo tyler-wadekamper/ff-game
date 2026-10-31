@@ -63,7 +63,7 @@ test('HTTP persistence, authorization, concurrency, validation and future-result
     assert.ok(!('rng' in state));
     assert.deepEqual(state.observed, {});
     assert.ok(Object.values(state.pastPoints).every((v) => v.length === 0));
-    const result = await call(`/api/leagues/${id}/players/${data.catalog.players[0].id}`, {
+    const result = await call(`/api/leagues/${id}/players/${created.data.catalog.players[0].id}`, {
       headers,
     });
     assert.equal(result.data.weeks.length, 0);
@@ -92,7 +92,7 @@ test('HTTP persistence, authorization, concurrency, validation and future-result
     assert.equal(result.status, 200);
     state = result.data.state;
     assert.equal(state.week, 2);
-    const player = await call(`/api/leagues/${id}/players/${data.catalog.players[0].id}`, {
+    const player = await call(`/api/leagues/${id}/players/${created.data.catalog.players[0].id}`, {
       headers,
     });
     assert.equal(player.data.weeks.length, 1);
@@ -106,4 +106,20 @@ test('HTTP persistence, authorization, concurrency, validation and future-result
     assert.equal(resumed.status, 200);
     assert.deepEqual(resumed.data.state, state);
   });
+  await t.test(
+    'recap archives stop at completed weeks; universe continuation requires the source key and a finished season',
+    async () => {
+      const first = await call(`/api/leagues/${id}/recaps/1`, { headers });
+      assert.equal(first.data.recap.week, 1);
+      assert.equal((await call(`/api/leagues/${id}/recaps/2`, { headers })).data.recap, null);
+      assert.equal((await call(`/api/leagues/${id}/recaps/1`)).status, 401);
+      const next = (source) =>
+        call('/api/leagues', {
+          method: 'POST',
+          body: JSON.stringify({ mode: 'continue', source }),
+        });
+      assert.equal((await next({ id, token: 'wrong' })).status, 401);
+      assert.equal((await next({ id, token })).status, 400);
+    },
+  );
 });

@@ -97,13 +97,13 @@ test('round robin covers every opponent once before repeats', () => {
   }
   assert.equal(pairs.size, 66);
 });
-test('every draft slot can finish a complete 192-pick draft', () => {
+test('every draft slot can finish a complete 168-pick draft', () => {
   for (let slot = 0; slot < 12; slot++) {
     const s = drafted(10 + slot, slot);
-    assert.equal(s.picks.length, 192);
-    assert.equal(new Set(s.picks.map((x) => x.player)).size, 192);
+    assert.equal(s.picks.length, 168);
+    assert.equal(new Set(s.picks.map((x) => x.player)).size, 168);
     for (const t of s.teams) {
-      assert.equal(t.roster.length, 16);
+      assert.equal(t.roster.length, 14);
       assert.ok(rosterComplete(t.roster, players));
       validateLineup(t, t.lineup, players);
     }

@@ -2,7 +2,7 @@
 
 ## Play the game
 
-**[Play Fourth & Forever in your browser](https://tyler-wadekamper.github.io/ff-game/)** — press **Start a season** to enter the draft immediately. The repository root includes the runnable browser build so GitHub Pages opens the game directly.
+**[Play Fourth & Forever in your browser](https://tyler-wadekamper.github.io/ff-game/)** — press **Start a new universe** to enter the draft immediately. The repository root includes the runnable browser build so GitHub Pages opens the game directly.
 
 For free public hosting, use the [browser edition and GitHub Pages publisher](docs/FREE_HOSTING.md). It runs the same game entirely on the player's device, supports offline play and full backup export/import. The Node server below remains available for server-owned saves and private outcomes.
 
@@ -14,14 +14,17 @@ npm start
 # Open http://localhost:3000 (or set PORT for another port).
 ```
 
-Node 22+ is sufficient to play. The fictional catalog and twelve private, pre-generated football worlds are packaged in `game/data/`; no NFL download, Python process or third-party API is needed at runtime. Saves persist in `game/saves/`. Keep that directory on persistent storage when hosting. Recovery files resume a league on the same server; the game requires a network connection to that server.
+Node 22+ is sufficient to play. The empirical source catalog, historical ADP kernel and twelve pre-generated football source worlds are packaged in `game/data/`; no NFL download, Python process or third-party API is needed at runtime. Saves persist in `game/saves/`. Keep that directory on persistent storage when hosting. Recovery files resume a league on the same server; the game requires a network connection to that server.
 
-[Gameplay evidence and screenshots](reports/GAME_PLAYTEST.md) · [Rules, draft-strategy research and platform/revenue decision](docs/GAME_DESIGN.md)
+[New profiles, recaps and universe evidence](reports/GAME_EXPERIENCE.md) · [Gameplay evidence and screenshots](reports/GAME_PLAYTEST.md) · [Rules, draft-strategy research and platform/revenue decision](docs/GAME_DESIGN.md)
 
 ```sh
-npm test                    # 30 engine and HTTP checks
+npm test                    # Engine, universe, experience and HTTP checks
 npm run validate:game       # 240 drafts and 120 complete seasons
 npm run test:browser        # Complete browser season; Chromium required
+npm run test:static         # Offline play, IR, recaps, continuation and fresh worlds
+npm run validate:universes  # 100 fresh + 20 continued universe distribution checks
+npm run validate:market     # Browser/Python ADP parity; research data + venv needed
 npm run data:game           # Repackage after rebuilding the research data
 .venv/bin/python -m ffsim.game_report  # Refresh gameplay evidence after playtests
 ```
@@ -135,7 +138,7 @@ weight(j) ∝ exp(-distance(x,j)^2 / (2 * local_bandwidth^2))
 
 Unlisted players have a censored target at 216; they are not treated as observed late prices. Per-position neighbor counts are selected using 2020–2022, with training through 2019. Ordering is audited on 2023–2024 using training only through 2022; the production model then uses all available market years. Individual rank errors remain visible. Rookie scouting, camp news and current medical news are absent from this history-only model.
 
-The ordering is mapped to historical consensus price spacing. In 1,000 simulated complete preference queues, log priority receives declared game randomness (SD .12/.18/.25 by tier). Each player's ADP is mean full-board rank; selection probability counts the first 192 picks. This gives all players a numeric value, including always-undrafted reserves, whose values are **extrapolated queue ranks**, not measured conditional ADPs. Room ranges are game randomness, not empirical confidence intervals. Twelve teams and sixteen rounds are configurable game assumptions. No fantasy draft or roster-construction strategy is simulated yet.
+The ordering is mapped to historical consensus price spacing. In 1,000 simulated complete preference queues, log priority receives declared game randomness (SD .12/.18/.25 by tier). Each player's ADP is mean full-board rank; selection probability counts the first 192 picks. This gives all players a numeric value, including always-undrafted reserves, whose values are **extrapolated queue ranks**, not measured conditional ADPs. Room ranges are game randomness, not empirical confidence intervals. That research experiment retains a 192-pick benchmark. The playable game uses a 168-pick draft, eight starters, six bench spots and two IR slots, with eleven distinct opponent strategies.
 
 ## Weekly paths conditional on season totals
 

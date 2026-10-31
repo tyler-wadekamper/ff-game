@@ -5,7 +5,9 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { randomBytes, randomUUID, timingSafeEqual } from 'node:crypto';
 import { gunzipSync } from 'node:zlib';
-import { createLeague, botsUntilHuman, applyAction, publicState, GameError } from './engine.mjs';
+import { applyAction, publicState, hydrateLeague, GameError } from './engine.mjs';
+import { universeServices } from './universe-store.mjs';
+import { weeklyRecap } from './season-recaps.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 export function loadData() {
@@ -13,7 +15,13 @@ export function loadData() {
   const privateData = JSON.parse(gunzipSync(readFileSync(path.join(ROOT, 'data/worlds.json.gz'))));
   if (catalog.version !== privateData.version)
     throw new Error('Game data versions differ. Run npm run data:game.');
-  return { catalog, privateData, players: new Map(catalog.players.map((p) => [p.id, p])) };
+  const adpModel = JSON.parse(gunzipSync(readFileSync(path.join(ROOT, 'data/adp-model.json.gz'))));
+  return {
+    catalog,
+    privateData,
+    adpModel,
+    players: new Map(catalog.players.map((p) => [p.id, p])),
+  };
 }
 const files = new Map([
   ['/', ['index.html', 'text/html; charset=utf-8']],
@@ -25,6 +33,10 @@ const files = new Map([
   ['/icon.svg', ['icon.svg', 'image/svg+xml']],
   ['/icon-192.png', ['icon-192.png', 'image/png']],
   ['/icon-512.png', ['icon-512.png', 'image/png']],
+  ...['config.mjs', 'player-insights.mjs'].map((name) => [
+    '/' + name,
+    ['../' + name, 'text/javascript; charset=utf-8'],
+  ]),
 ]);
 function json(res, status, value) {
   res.writeHead(status, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
@@ -58,6 +70,7 @@ export async function startServer({
   const { catalog, privateData, players } = data,
     locks = new Map(),
     creationWindows = new Map();
+  const services = universeServices(data);
   const savePath = (id) => path.join(saveDir, id + '.json');
   async function save(id, record) {
     const temp = savePath(id) + '.tmp';
@@ -87,7 +100,7 @@ export async function startServer({
       if (req.method === 'GET' && route === '/api/health')
         return json(res, 200, { ok: true, version: catalog.version });
       if (req.method === 'GET' && route === '/api/catalog') {
-        const content = Buffer.from(JSON.stringify(catalog));
+        const content = Buffer.from(JSON.stringify(services.baseCatalog));
         if (req.headers['accept-encoding']?.includes('gzip')) {
           const { gzipSync } = await import('node:zlib');
           res.writeHead(200, {
@@ -99,7 +112,7 @@ export async function startServer({
           res.end(gzipSync(content));
           return;
         }
-        return json(res, 200, catalog);
+        return json(res, 200, services.baseCatalog);
       }
       if (req.method === 'POST' && route === '/api/leagues') {
         const address = req.socket.remoteAddress ?? 'unknown',
@@ -116,22 +129,36 @@ export async function startServer({
         const options = await body(req),
           id = randomUUID(),
           token = randomBytes(24).toString('hex');
-        const state = createLeague({
-          name: options.name,
-          slot: options.slot,
-          seed: randomBytes(4).readUInt32LE(),
-          version: catalog.version,
-          worlds: privateData.worlds.length,
-        });
-        botsUntilHuman(state, catalog, players);
-        await save(id, { token, state });
+        let source = null;
+        if (options.mode === 'continue') {
+          if (!/^[a-f0-9-]{36}$/.test(options.source?.id ?? ''))
+            throw new GameError('Choose a completed saved universe.');
+          try {
+            source = JSON.parse(await fs.readFile(savePath(options.source.id), 'utf8'));
+          } catch {
+            throw new GameError('That completed season could not be found.');
+          }
+          if (!tokenMatches(source.token, options.source.token))
+            return json(res, 401, { error: 'The prior universe needs its recovery key.' });
+        }
+        const created = services.create(
+          options,
+          source,
+          randomBytes(4).readUInt32LE(),
+          randomUUID(),
+        );
+        const { state, universe, context } = created;
+        await save(id, { token, state, universe });
         return json(res, 201, {
           id,
           token,
-          state: publicState(state, catalog, players, privateData.worlds[state.world]),
+          state: publicState(state, context.catalog, context.players, context.world),
+          catalog: context.catalog,
         });
       }
-      const match = route.match(/^\/api\/leagues\/([a-f0-9-]{36})(?:\/(actions|players\/[^/]+))?$/);
+      const match = route.match(
+        /^\/api\/leagues\/([a-f0-9-]{36})(?:\/(actions|players\/[^/]+|recaps\/\d+))?$/,
+      );
       if (match) {
         const id = match[1];
         return await serialized(id, async () => {
@@ -146,13 +173,14 @@ export async function startServer({
           if (!tokenMatches(record.token, token))
             return json(res, 401, { error: 'This league needs its saved recovery key.' });
           const state = record.state;
-          if (state.version !== catalog.version)
-            return json(res, 409, {
-              error: 'Player data changed. Create a new league; your old save has been retained.',
-            });
-          const world = privateData.worlds[state.world];
+          const { catalog, players, world } = services.context(record);
+          if (hydrateLeague(state, catalog, players, world)) await save(id, record);
           if (req.method === 'GET' && !match[2])
-            return json(res, 200, { state: publicState(state, catalog, players, world) });
+            return json(res, 200, { state: publicState(state, catalog, players, world), catalog });
+          if (req.method === 'GET' && match[2]?.startsWith('recaps/'))
+            return json(res, 200, {
+              recap: weeklyRecap(state, catalog, Number(match[2].slice(7))),
+            });
           if (req.method === 'GET' && match[2]?.startsWith('players/')) {
             const player = decodeURIComponent(match[2].slice(8));
             if (!players.has(player)) return json(res, 404, { error: 'Player not found.' });
@@ -170,7 +198,7 @@ export async function startServer({
               });
             const next = structuredClone(state);
             applyAction(next, input.action ?? {}, catalog, players, world);
-            await save(id, { token: record.token, state: next });
+            await save(id, { ...record, state: next });
             return json(res, 200, { state: publicState(next, catalog, players, world) });
           }
           return json(res, 405, { error: 'Method not allowed.' });

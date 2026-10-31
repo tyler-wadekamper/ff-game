@@ -53,7 +53,7 @@ for (let i = 0; i < summary.drafts; i++) {
     row.first4RB += picks.slice(0, 4).filter((x) => players.get(x.player).position === 'RB').length;
     row.first4WR += picks.slice(0, 4).filter((x) => players.get(x.player).position === 'WR').length;
     row.reach +=
-      picks.reduce((sum, x) => sum + Math.max(0, players.get(x.player).adp - x.pick), 0) / 16;
+      picks.reduce((sum, x) => sum + Math.max(0, players.get(x.player).adp - x.pick), 0) / 14;
     profiles[t.profile.plan] = row;
   }
   if (i < summary.seasons) {

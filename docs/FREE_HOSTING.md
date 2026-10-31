@@ -15,7 +15,7 @@ npm run test:static
 npm run publish:pages
 ```
 
-`build:pages` copies the generated browser edition to the source repository root, including a real `index.html` and `.nojekyll`. Commit these generated root files with source updates so **main / (root)** opens the game directly rather than rendering the README. The publisher also refreshes those root files and uploads the same playable site to `gh-pages`, without force-pushing. Both publishing branches therefore support the same direct game URL. They contain the fictional catalog, twelve packaged worlds, game engine and interface; no local league saves or credentials are included. `_site/` is generated and ignored by Git.
+`build:pages` copies the generated browser edition to the source repository root, including a real `index.html` and `.nojekyll`. Commit these generated root files with source updates so **main / (root)** opens the game directly rather than rendering the README. The publisher also refreshes those root files and uploads the same playable site to `gh-pages`, without force-pushing. Both publishing branches therefore support the same direct game URL. They contain the fictional catalog, twelve empirical source worlds, the historical market kernel, procedural universe generator, game engine and interface; no local league saves or credentials are included. `_site/` is generated and ignored by Git.
 
 For first-time GitHub Pages activation, a repository administrator may need to open:
 
@@ -31,4 +31,4 @@ The same `_site/` directory can be uploaded to other free static hosts. `reports
 
 ## Validation
 
-The static browser test serves the actual build at `/ff-game/`, verifies relative assets and the PWA, drafts all 192 players, reloads offline, plays all 18 weeks without a server, and restores a full backup in another browser context. It checks JavaScript and HTTP errors. Evidence is retained in `reports/static_browser_checks.json`.
+The static browser test serves the actual build at `/ff-game/`, verifies relative assets and the PWA, drafts all 168 players, reloads offline, plays all 18 weeks without a server, and restores a full backup in another browser context. It also exercises player career cards, IR and replacement pickups, city depth charts, weekly/yearly recaps, continuing a universe and generating a fresh one. It checks JavaScript and HTTP errors. Evidence is retained in `reports/static_browser_checks.json`.

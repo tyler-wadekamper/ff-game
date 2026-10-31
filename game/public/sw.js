@@ -1,8 +1,10 @@
-const CACHE = 'fourth-forever-shell-v1';
+const CACHE = 'fourth-forever-shell-v2';
 const SHELL = [
   '/',
   '/style.css',
   '/app.js',
+  '/config.mjs',
+  '/player-insights.mjs',
   '/icon.svg',
   '/manifest.webmanifest',
   '/icon-192.png',

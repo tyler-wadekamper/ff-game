@@ -41,16 +41,16 @@ def report_game(root):
         shutil.copyfile(art/name,out/name)
     from .presentation import markdown_table
     text=['# Fourth & Forever: executed gameplay evidence','',
-          'Run `npm ci` then `npm start`, and open http://localhost:3000. The browser game supports desktop and phones; it has an installable PWA shell. Gameplay requires the server.','',
+          'Run `npm ci` then `npm start`, and open http://localhost:3000. The browser game supports desktop and phones; it has an installable PWA shell. The Node edition requires the server; the published browser edition runs locally and supports offline play.','',
           '[Rules, strategy research, platform/revenue decision and architecture](../docs/GAME_DESIGN.md)','',
           '## What is playable','',
-          'A 192-pick, twelve-team snake draft with queue, manual picks, auto-picks and a complete draft board. Eleven managers have distinct strategies and skill/noise settings. Eight starting slots and eight bench spots can be managed manually. Weekly play locks lineups, scores all matchups, updates standings, processes contested $100 FAAB waivers, runs the six-team playoffs and records a champion. Week 18 is an exhibition. Saves survive reloads and server restarts; recovery files resume on the same server.','',
+          'A 168-pick, twelve-team snake draft with queue, manual picks, auto-picks and a complete draft board. Eleven managers have distinct strategies and skill/noise settings. Eight starting slots, six bench spots and two IR slots can be managed manually. Weekly play locks lineups, scores all matchups, updates standings, processes contested $100 FAAB waivers, runs the six-team playoffs and records a champion. Week 18 is an exhibition. Saves survive reloads and server restarts; recovery files resume on the same server.','',
           '![Draft room](game_draft_desktop.png)','',
           '![Weekly lineup and matchup](game_lineup_desktop.png)','',
           '## Validation that actually ran','',
           f"- **{evidence['drafts']} complete drafts / {evidence['draftPicks']:,} selections.** Every roster completed legally, with no duplicate ownership.",
           f"- **{evidence['seasons']} complete seasons / {evidence['weeklyAdvances']:,} advances.** All ran through Week 18 with legal rosters, nonnegative budgets, playoffs and a champion.",
-          '- **30 Node tests** cover the engine and HTTP behavior: all draft slots, positional legality, exact cent scoring, locked snapshots, bids/ties/overcommitment, dropped-player cooldown, deterministic resume, playoff byes/reseeding/ties, save persistence, authentication and concurrent stale revisions.',
+          '- **42 Node tests** cover the engine and HTTP behavior: all draft slots, positional legality, exact cent scoring, locked snapshots, bids/ties/overcommitment, dropped-player cooldown, deterministic resume, playoff byes/reseeding/ties, save persistence, authentication and concurrent stale revisions.',
           '- **A full browser season** exercised queue/manual/auto drafting, profiles, lineup swaps, waivers with a $100 winning bid, mobile navigation, reload/resume, all 18 advances, standings and the championship. No JavaScript or HTTP errors were observed.',
           '- **12 packaged football worlds / 11,664 player calendars / 209,952 weekly rows.** Export reconciled every player to its generated season totals; tests independently verify weekly PPR accounting and bye/nonparticipation zeros.',
           '- Future results, private worlds, server files and saved league files have no public HTTP route. Draft choices remain identical when the hidden world changes. Lineup choices remain identical when hidden points change but published availability does not.','',
@@ -61,7 +61,7 @@ def report_game(root):
           '![Opponent strategy and results](game_bot_validation.png)','',
           '## Mobile and limits','',
           '![Mobile waiver wire](game_waivers_mobile.png)','',
-          'This is a local, single-process prototype with twelve packaged football worlds, not a public commercial launch. It does not connect payments, simulate dynasty offseasons or trades, or add causal medical injuries/team play-by-play. It retains the documented ADP source-format, positional-margin and rare weekly-tail biases from the research model. Manager preferences and noise are game-design choices, not calibrated human behavior.','',
+          'The browser edition now remixes these twelve empirical source worlds into fresh universes and can carry player histories into subsequent seasons. See [the new experience report](GAME_EXPERIENCE.md) for profiles, IR, recap scorecards and distribution regression. Billing, trades and shared-team play-by-play remain outside this prototype. Medical story labels and turnover rules are game-design choices. It retains the documented ADP source-format, positional-margin and rare weekly-tail biases from the research model. Manager preferences and noise are game-design choices, not calibrated human behavior.','',
           '[Playtest JSON](game_playtest.json) · [Bot metrics CSV](game_bot_metrics.csv) · [Browser checks](game_browser_checks.json) · [World export checks](game_data_checks.json)','']
     (out/'GAME_PLAYTEST.md').write_text('\n'.join(text))
     print('Wrote gameplay evidence, screenshots and opponent comparison graph')

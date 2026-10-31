@@ -84,7 +84,7 @@ const { chromium } = require('playwright');
         ).state;
       });
     await page.goto(base, { waitUntil: 'networkidle' });
-    await page.waitForSelector('#team-name');
+    await page.waitForSelector('#team-city');
     assert.equal(await page.locator('[data-quick-start]').count(), 1);
     const start = await page.locator('[data-quick-start]').boundingBox();
     assert.ok(
@@ -101,7 +101,38 @@ const { chromium } = require('playwright');
     await page.locator('[data-finish-confirm]').click();
     await page.waitForSelector('[data-advance]');
     await wait();
-    assert.equal((await state()).picks.length, 192);
+    assert.equal((await state()).picks.length, 168);
+    // Real UI reserve -> free pickup into the open slot, then activate on recovery.
+    let firstState = await state();
+    const injured = firstState.teams[firstState.human].roster.find(
+      (id) => firstState.injuryReports[id].irEligible,
+    );
+    if (injured) {
+      await page.locator(`[data-profile="${injured}"]`).first().click();
+      await page.waitForSelector('.career-table');
+      assert.ok(await page.locator('.outlook').count());
+      await page.screenshot({
+        path: path.join(root, 'artifacts/player_career_mobile.png'),
+        fullPage: false,
+      });
+      await page.locator(`#dialog [data-reserve="${injured}"]`).click();
+      await wait();
+      const stashed = await state();
+      assert.equal(stashed.teams[stashed.human].ir.length, 1);
+      assert.equal(stashed.teams[stashed.human].roster.length, 13);
+      await page.locator('.nav [data-route="waivers"]').click();
+      await page.locator(`[data-position="${injured.split('-')[0]}"]`).click();
+      await page.locator('[data-acquire]:not([disabled])').first().click();
+      assert.equal(await page.locator('#drop-player').inputValue(), '');
+      await page.locator('[data-submit-claim]').click();
+      await wait();
+      assert.equal((await state()).teams[firstState.human].roster.length, 14);
+      await page.locator('.nav [data-route="team"]').click();
+    }
+    await page.locator('.nav [data-route="depth"]').click();
+    await page.selectOption('#depth-club', 'DET');
+    assert.equal(await page.locator('.depth-grid .card').count(), 4);
+    await page.locator('.nav [data-route="team"]').click();
     await page.evaluate(async () => {
       await navigator.serviceWorker.ready;
     });
@@ -111,6 +142,13 @@ const { chromium } = require('playwright');
     await page.reload({ waitUntil: 'load' });
     await page.waitForSelector('[data-advance]');
     for (let week = 1; week <= 18; week++) {
+      const current = await state();
+      for (const id of current.teams[current.human].ir ?? [])
+        if (!current.injuryReports[id].irEligible) {
+          await page.locator(`[data-activate-ir="${id}"]`).click();
+          await page.locator('[data-submit-claim]').click();
+          await wait();
+        }
       await page.locator('[data-optimize]').click();
       await wait();
       await page.locator('[data-advance]').click();
@@ -123,12 +161,15 @@ const { chromium } = require('playwright');
       )
         await page.locator('[data-play-confirm]').click();
       await page.waitForFunction(
-        (w) =>
-          document
-            .querySelector('dialog[open]')
-            ?.textContent.includes('Week ' + w + ' is in the books'),
+        (w) => document.querySelector('dialog[open] [data-weekly-report="' + w + '"]'),
         week,
       );
+      assert.ok((await page.locator(`[data-weekly-report="${week}"] .award-card`).count()) >= 8);
+      if (week === 3)
+        await page.screenshot({
+          path: path.join(root, 'artifacts/weekly_recap_mobile.png'),
+          fullPage: false,
+        });
       await page.locator('[data-close]').last().click();
       await wait();
       assert.equal((await state()).week, week + 1);
@@ -148,7 +189,7 @@ const { chromium } = require('playwright');
     const other = await browser.newContext({ viewport: { width: 1440, height: 1000 } }),
       second = await other.newPage();
     await second.goto(base, { waitUntil: 'networkidle' });
-    await second.waitForSelector('#team-name');
+    await second.waitForSelector('#team-city');
     await second.evaluate(async (payload) => {
       await FF_IMPORT(payload);
       localStorage.setItem('ff-current', JSON.stringify({ id: payload.id, token: payload.token }));
@@ -169,6 +210,63 @@ const { chromium } = require('playwright');
       path: path.join(root, 'artifacts/static_game_completed.png'),
       fullPage: true,
     });
+    await second.locator('.nav [data-route="recaps"]').click();
+    assert.equal(await second.locator('[data-season-report]').count(), 1);
+    await second.screenshot({
+      path: path.join(root, 'artifacts/season_yearbook_desktop.png'),
+      fullPage: true,
+    });
+    await second.locator('[data-show-recap="1"]').click();
+    await second.waitForSelector('dialog [data-weekly-report="1"]');
+    assert.equal(await second.locator('dialog [data-weekly-report="1"]').count(), 1);
+    await second.locator('[data-close]').click();
+    await second.locator('.nav [data-route="team"]').click();
+    await second.locator('[data-continue]').click();
+    await second.locator('#setup-form [data-create]').click();
+    await second.waitForFunction(
+      () => !document.querySelector('dialog[open]') && !document.querySelector('.busy-indicator'),
+    );
+    await second.waitForSelector('[data-draft]');
+    const next = await second.evaluate(async () => {
+      const c = JSON.parse(localStorage.getItem('ff-current'));
+      return await (
+        await FF_API('/api/leagues/' + c.id, { headers: { Authorization: 'Bearer ' + c.token } })
+      ).json();
+    });
+    assert.equal(next.state.seasonYear, completed.seasonYear + 1);
+    assert.equal(next.state.universe.id, completed.universe.id);
+    assert.ok(next.catalog.players.some((p) => backup.league.picks.some((x) => x.player === p.id)));
+    const retained = next.catalog.players.find(
+      (p) =>
+        backup.league.picks.some((x) => x.player === p.id) &&
+        !next.state.picks.some((x) => x.player === p.id),
+    );
+    await second.fill('#search', retained.name);
+    await second.locator(`[data-profile="${retained.id}"]`).click();
+    await second.waitForSelector('.career-table');
+    assert.match(await second.locator('.career-table').first().innerText(), /2026/);
+    await second.screenshot({
+      path: path.join(root, 'artifacts/player_career_desktop.png'),
+      fullPage: false,
+    });
+    await second.locator('[data-close]').click();
+    await second.locator('[data-settings]').click();
+    await second.locator('[data-new]').click();
+    await second.locator('#setup-form [data-create]').click();
+    await second.waitForFunction(
+      () => !document.querySelector('dialog[open]') && !document.querySelector('.busy-indicator'),
+    );
+    await second.waitForSelector('[data-draft]');
+    const brandNew = await second.evaluate(async () => {
+      const c = JSON.parse(localStorage.getItem('ff-current'));
+      return await (
+        await FF_API('/api/leagues/' + c.id, { headers: { Authorization: 'Bearer ' + c.token } })
+      ).json();
+    });
+    assert.notEqual(brandNew.state.universe.id, next.state.universe.id);
+    assert.ok(
+      brandNew.catalog.players.every((p) => !next.catalog.players.some((q) => q.id === p.id)),
+    );
     await fs.rm(backupPath);
     assert.deepEqual(errors, []);
     assert.deepEqual(bad, []);
@@ -185,6 +283,11 @@ const { chromium } = require('playwright');
           fullDraft: true,
           saveReload: true,
           crossBrowserBackupRestore: true,
+          injuryReserveUI: Boolean(injured),
+          cityDepthCharts: true,
+          weeklyAndYearlyRecaps: true,
+          continuationRetainsHistory: true,
+          newUniverseRegeneratesPlayers: true,
           jsErrors: errors,
           httpErrors: bad,
         },
@@ -193,7 +296,7 @@ const { chromium } = require('playwright');
       ),
     );
     console.log(
-      'Static Pages build passed: subdirectory assets, 192-pick draft, offline reload, all 18 weeks offline, local saves and full cross-browser backup recovery.',
+      'Static Pages build passed: subdirectory assets, 168-pick draft, offline reload, all 18 weeks offline, local saves and full cross-browser backup recovery.',
     );
   } finally {
     if (browser) await browser.close();

@@ -1,6 +1,6 @@
 # Fourth & Forever: initial playable game
 
-The game is a browser-first, phone-friendly single-player fantasy football simulator. A user drafts against eleven managers, sets lineups, makes waiver decisions and plays through the season at their own pace. Names, clubs and fantasy franchises are fictional. The existing empirical player histories, ADP and weekly generator supply the actual player universe.
+The game is a browser-first, phone-friendly single-player fantasy football simulator. A user drafts against eleven managers, sets lineups, makes waiver decisions and plays through the season at their own pace. Player identities are fictional; football clubs and fantasy franchises use NFL city markets and abbreviations, without mascots. The existing empirical player histories, ADP and weekly generator supply the actual player universe.
 
 ## Platform and revenue decision
 
@@ -64,7 +64,7 @@ Waivers run manually or automatically before kickoff, once per week. Week 1 pick
 
 The public catalog contains fictional names, histories, age, anonymous club, known bye, ADP and a public scouting estimate. The server privately loads `worlds.json.gz`, chooses one world per league, and exposes only completed-week results and current-week availability. None of the raw private world files, server files or save files has an HTTP route. A player-detail endpoint returns completed weeks only. Outcomes are never used by the draft valuation function, and changing hidden points without changing current availability cannot change lineup optimization.
 
-This prototype has **twelve packaged football worlds**, with different drafts and manager randomness per league. It does not promise unlimited fresh season outcomes; the exporter can package more of the validated ensemble. Incoming future career cohorts, dynasty progression, trades, medical injury causation, opponent defenses and shared-team play-by-play remain separate future features. The ADP/source-format and weekly-tail limitations in the existing research reports still apply.
+Each new universe remixes one whole empirical source pool, with history-only role matching, bounded 8% whole-vector variation and shuffled played-game blocks. A compiled historical-neighbor market model reprices the new histories. The 972-player position counts and NFL-sized outcome budgets are preserved. Continue-universe mode carries completed seasons into history, ages retained players and introduces rookies through a declared turnover rule; fantasy rosters redraft each year. Resume opens the current saved season without advancing or regenerating it. The browser and server use the same generator. See [the experience evidence](../reports/GAME_EXPERIENCE.md) for distribution regression and limitations.
 
 ## Persistence and deployment
 

@@ -8,6 +8,11 @@
   "fullDraft": true,
   "saveReload": true,
   "crossBrowserBackupRestore": true,
+  "injuryReserveUI": true,
+  "cityDepthCharts": true,
+  "weeklyAndYearlyRecaps": true,
+  "continuationRetainsHistory": true,
+  "newUniverseRegeneratesPlayers": true,
   "jsErrors": [],
   "httpErrors": []
 }

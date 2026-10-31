@@ -40,7 +40,7 @@ const { chromium } = require('playwright');
       });
     await page.goto(base, { waitUntil: 'networkidle' });
     await page.screenshot({ path: path.join(root, 'artifacts/game_welcome.png'), fullPage: true });
-    await page.fill('#team-name', 'Sunday Test Club');
+    await page.selectOption('#team-city', 'DET');
     await page.selectOption('#draft-slot', '6');
     await page.locator('#setup-form [data-create]').click();
     await page.waitForSelector('[data-draft]');
@@ -63,7 +63,7 @@ const { chromium } = require('playwright');
     await page.locator('[data-profile]').first().click();
     await page.waitForSelector('#player-weeks');
     await page.waitForFunction(() =>
-      document.querySelector('#player-weeks').textContent.includes('hasn’t started'),
+      document.querySelector('#player-weeks').textContent.includes('No games completed'),
     );
     await page.locator('[data-close]').click();
     await page.screenshot({
@@ -79,8 +79,8 @@ const { chromium } = require('playwright');
     await wait();
     s = await state();
     assert.equal(s.phase, 'season');
-    assert.equal(s.picks.length, 192);
-    assert.ok(s.teams.every((t) => t.roster.length === 16));
+    assert.equal(s.picks.length, 168);
+    assert.ok(s.teams.every((t) => t.roster.length === 14));
     assert.equal(await page.locator('[data-lineup-slot]').count(), 8);
     await page.locator('[data-optimize]').click();
     await wait();
@@ -105,7 +105,7 @@ const { chromium } = require('playwright');
     )
       await page.locator('[data-play-confirm]').click();
     await page.waitForFunction(() =>
-      document.querySelector('dialog[open]')?.textContent.includes('Week 1 is in the books'),
+      document.querySelector('dialog[open] [data-weekly-report="1"]'),
     );
     await page.locator('[data-close]').last().click();
     await wait();
@@ -153,10 +153,7 @@ const { chromium } = require('playwright');
       )
         await page.locator('[data-play-confirm]').click();
       await page.waitForFunction(
-        (w) =>
-          document
-            .querySelector('dialog[open]')
-            ?.textContent.includes('Week ' + w + ' is in the books'),
+        (w) => document.querySelector('dialog[open] [data-weekly-report="' + w + '"]'),
         week,
       );
       await page.locator('[data-close]').last().click();

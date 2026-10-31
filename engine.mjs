@@ -9,7 +9,21 @@ import {
   forecast,
   pickPlayer,
   optimalLineup,
+  rosterFeasible,
+  canAcquire,
 } from './strategy.mjs';
+import {
+  ROSTER_SIZE,
+  IR_SIZE,
+  DRAFT_PICKS,
+  DRAFT_ROUNDS,
+  NFL_CLUBS,
+  clubInfo,
+  shuffled,
+} from './config.mjs';
+import { injuryReport } from './injuries.mjs';
+import { BOX_FIELDS, currentRanks } from './player-insights.mjs';
+import { captureWeek, weeklyRecap, yearlyRecap } from './season-recaps.mjs';
 export { SLOTS, PROFILES, forecast, rosterComplete };
 export const HUMAN_PROFILE = { plan: 'value', skill: 0.85, noise: 0.08 };
 export class GameError extends Error {}
@@ -42,6 +56,10 @@ export function createLeague({
   seed = 12345,
   version,
   worlds = 12,
+  city = 'DET',
+  franchises = null,
+  seasonYear = 2026,
+  universe = null,
 } = {}) {
   ensure(Number.isInteger(slot) && slot >= 0 && slot < 12, 'Choose a draft slot from 1 to 12.');
   ensure(
@@ -69,6 +87,12 @@ export function createLeague({
     availableAt: {},
     playoffs: null,
     champion: null,
+    seasonYear,
+    universe,
+    rules: { rosterSize: ROSTER_SIZE, benchSize: 6, irSize: IR_SIZE, draftRounds: DRAFT_ROUNDS },
+    statsSchema: 2,
+    irMoves: [],
+    weekRecords: [],
   };
   const profiles = PROFILES.map((p) => ({ ...p }));
   // Strategy locations change between leagues; quality and personalities remain legible.
@@ -76,11 +100,24 @@ export function createLeague({
     const k = Math.floor(random(state) * (n + 1));
     [profiles[n], profiles[k]] = [profiles[k], profiles[n]];
   }
+  const home = clubInfo(city),
+    choices = franchises
+      ? franchises
+          .filter((t) => t.club !== home.id)
+          .map((t) => ({ ...clubInfo(t.club), profile: t.profile }))
+      : shuffled(
+          NFL_CLUBS.filter((c) => c.id !== home.id),
+          () => random(state),
+        ).slice(0, 11);
   for (let i = 0; i < 12; i++) {
-    const profile = i === slot ? null : profiles.pop();
+    const club = i === slot ? home : choices.pop();
+    const profile = i === slot ? null : (club.profile ?? profiles.pop());
     state.teams.push({
       id: i,
-      name: i === slot ? name.trim() : profile.name,
+      name: club.city + ' · ' + club.abbreviation,
+      city: club.city,
+      abbreviation: club.abbreviation,
+      club: club.id,
       profile,
       roster: [],
       lineup: Array(8).fill(null),
@@ -91,13 +128,16 @@ export function createLeague({
       pa: 0,
       faab: 100,
       waiverPriority: 12 - i,
+      ir: [],
     });
   }
   state.world = Math.floor(random(state) * worlds);
   return state;
 }
 export function ownerMap(state) {
-  return new Map(state.teams.flatMap((t) => t.roster.map((id) => [id, t.id])));
+  return new Map(
+    state.teams.flatMap((t) => [...t.roster, ...(t.ir ?? [])].map((id) => [id, t.id])),
+  );
 }
 export function availablePlayers(state, catalog) {
   const owned = ownerMap(state);
@@ -109,7 +149,7 @@ export function standings(state) {
   );
 }
 export function selectDraft(state, id, catalog, players) {
-  ensure(state.phase === 'draft' && state.pick < 192, 'The draft is complete.');
+  ensure(state.phase === 'draft' && state.pick < DRAFT_PICKS, 'The draft is complete.');
   const team = state.teams[draftTeam(state.pick)],
     p = players.get(id);
   ensure(p && !ownerMap(state).has(id), 'That player has already been drafted.');
@@ -118,7 +158,7 @@ export function selectDraft(state, id, catalog, players) {
   team.roster.push(id);
   state.queue = state.queue.filter((x) => x !== id);
   state.picks.push({ pick: pick + 1, round: Math.floor(pick / 12) + 1, team: team.id, player: id });
-  if (state.pick === 192) {
+  if (state.pick === DRAFT_PICKS) {
     state.phase = 'season';
     for (const t of state.teams) {
       ensure(rosterComplete(t.roster, players), 'Draft produced an incomplete roster.');
@@ -185,19 +225,224 @@ export function optimizeTeam(state, team, players, world) {
 }
 function swap(state, team, add, drop, players, source, bid = 0) {
   ensure(
-    canSwap(team.roster, add, drop, players),
+    canAcquire(team.roster, add, drop, players),
     'Keep at least 1 QB, 2 RB, 2 WR, 1 TE and seven non-QBs.',
   );
   team.roster = team.roster.filter((id) => id !== drop).concat(add);
   team.lineup = team.lineup.map((id, i) =>
     id === drop ? (eligible(players.get(add).position, SLOTS[i]) ? add : null) : id,
   );
-  state.availableAt[drop] = state.week + 1;
+  if (drop) state.availableAt[drop] = state.week + 1;
+  if (!drop) {
+    const slot = team.lineup.findIndex(
+      (id, i) => !id && eligible(players.get(add).position, SLOTS[i]),
+    );
+    if (slot >= 0) team.lineup[slot] = add;
+  }
   state.transactions.push({ week: state.week, team: team.id, add, drop, bid, source });
 }
-export function submitClaim(state, team, claim, players) {
+function unresolvedIR(state, team, players, world) {
+  return (team.ir ?? []).some(
+    (id) => !world || !injuryReport(state, players.get(id), world).irEligible,
+  );
+}
+export function moveToIR(state, team, id, players, world) {
+  ensure(state.phase === 'season', 'IR opens after the draft.');
+  ensure(team.roster.includes(id), 'Only an active-roster player can move to IR.');
+  ensure((team.ir ?? []).length < IR_SIZE, 'Both injured-reserve slots are full.');
+  ensure(
+    injuryReport(state, players.get(id), world).irEligible,
+    'Only a medically OUT or IR player qualifies. Byes and nonmedical inactivity do not.',
+  );
+  team.ir ??= [];
+  team.ir.push(id);
+  team.roster = team.roster.filter((p) => p !== id);
+  team.lineup = team.lineup.map((p) => (p === id ? null : p));
+  team.legacyOverflow = Math.max(0, team.roster.length - ROSTER_SIZE);
+  state.irMoves.push({ week: state.week, team: team.id, player: id, action: 'reserve' });
+}
+export function activateIR(state, team, id, drop, players) {
+  ensure(
+    state.phase === 'season' && team.ir?.includes(id),
+    'That player is not on your injured reserve.',
+  );
+  ensure(
+    canAcquire(team.roster, id, drop ?? null, players),
+    'Choose a legal active-roster drop, or use an open roster spot.',
+  );
+  team.ir = team.ir.filter((p) => p !== id);
+  swap(state, team, id, drop ?? null, players, 'IR activation');
+  state.irMoves.push({ week: state.week, team: team.id, player: id, action: 'activate' });
+}
+export function releasePlayer(state, team, id, players) {
+  ensure(state.phase === 'season', 'Roster moves open after the draft.');
+  ensure(team.roster.includes(id) || team.ir?.includes(id), 'That player is not on your team.');
+  const after = team.roster.filter((p) => p !== id);
+  ensure(
+    after.length > ROSTER_SIZE || rosterFeasible(after, players),
+    'That drop leaves no way to fill the required positions.',
+  );
+  team.roster = after;
+  team.ir = (team.ir ?? []).filter((p) => p !== id);
+  team.lineup = team.lineup.map((p) => (p === id ? null : p));
+  team.legacyOverflow = Math.max(0, after.length - ROSTER_SIZE);
+  state.availableAt[id] = state.week + 1;
+  state.transactions.push({
+    week: state.week,
+    team: team.id,
+    add: null,
+    drop: id,
+    bid: 0,
+    source: 'Released',
+  });
+}
+function manageBotIR(state, catalog, players, world) {
+  if (state.botIRWeek === state.week) return;
+  state.botIRWeek = state.week;
+  for (const team of state.teams) {
+    if (team.id === state.human) continue;
+    for (const id of [...(team.ir ?? [])]) {
+      if (injuryReport(state, players.get(id), world).irEligible) continue;
+      const drops = team.roster
+        .filter((drop) => canSwap(team.roster, id, drop, players))
+        .sort(
+          (a, b) =>
+            forecast(players.get(a), state.observed) - forecast(players.get(b), state.observed),
+        );
+      if (team.roster.length < ROSTER_SIZE && canDraft(team.roster, players.get(id), players))
+        activateIR(state, team, id, null, players);
+      else if (
+        drops.length &&
+        forecast(players.get(id), state.observed) >= forecast(players.get(drops[0]), state.observed)
+      )
+        activateIR(state, team, id, drops[0], players);
+      else releasePlayer(state, team, id, players);
+    }
+    while (team.roster.length > ROSTER_SIZE) {
+      const choices = [...team.roster].sort(
+        (a, b) =>
+          forecast(players.get(a), state.observed) - forecast(players.get(b), state.observed),
+      );
+      const drop = choices.find(
+        (id) =>
+          team.roster.length - 1 > ROSTER_SIZE ||
+          rosterFeasible(
+            team.roster.filter((p) => p !== id),
+            players,
+          ),
+      );
+      releasePlayer(state, team, drop, players);
+    }
+    if (random(state) > 0.6 + 0.4 * team.profile.skill) continue;
+    const candidates = team.roster
+      .filter(
+        (id) =>
+          injuryReport(state, players.get(id), world).irEligible &&
+          forecast(players.get(id), state.observed) > 2,
+      )
+      .sort(
+        (a, b) =>
+          forecast(players.get(b), state.observed) - forecast(players.get(a), state.observed),
+      );
+    for (const id of candidates)
+      if (team.ir.length < IR_SIZE) moveToIR(state, team, id, players, world);
+  }
+}
+function fillBotVacancies(state, catalog, players, world) {
+  for (const team of state.teams) {
+    if (team.id === state.human) continue;
+    while (team.roster.length < ROSTER_SIZE) {
+      const options = availablePlayers(state, catalog).filter(
+        (p) => (state.availableAt[p.id] ?? 1) <= state.week && canDraft(team.roster, p, players),
+      );
+      options.sort(
+        (a, b) =>
+          weeklyProjection(state, b, world) - weeklyProjection(state, a, world) ||
+          forecast(b, state.observed) - forecast(a, state.observed),
+      );
+      if (!options.length) break;
+      swap(state, team, options[0].id, null, players, 'Free agent');
+    }
+  }
+}
+function observeWeek(state, p, row, week) {
+  const record = state.observed[p.id] ?? {
+    points: 0,
+    games: 0,
+    last: [],
+    totals: Object.fromEntries(BOX_FIELDS.map((k) => [k, 0])),
+    recent: [],
+  };
+  record.points += row[0];
+  record.totals ??= Object.fromEntries(BOX_FIELDS.map((k) => [k, 0]));
+  record.recent ??= [];
+  record.weeklyPoints ??= [];
+  record.weeklyPoints[week - 1] =
+    row.at(-1) && (row[1] + row[6] + row[9] > 0 || row[0] !== 0) ? row[0] : null;
+  BOX_FIELDS.forEach((k, i) => {
+    record.totals[k] += row[i + 1];
+  });
+  if (row.at(-1)) {
+    record.games++;
+    record.last.push(row[0]);
+    record.recent.push({ week, points: row[0], opportunities: row[1] + row[6] + row[9] });
+    record.recent = record.recent.slice(-4);
+  }
+  state.observed[p.id] = record;
+}
+export function hydrateLeague(state, catalog, players, world) {
+  let changed = false;
+  state.seasonYear ??= catalog.seasonYear ?? 2026;
+  state.irMoves ??= [];
+  state.weekRecords ??= [];
+  for (const t of state.teams) {
+    if (!t.ir) {
+      t.ir = [];
+      changed = true;
+    }
+    if (!t.abbreviation) {
+      const c = NFL_CLUBS[t.id];
+      t.name = c.city + ' · ' + c.abbreviation;
+      t.city = c.city;
+      t.club = c.id;
+      t.abbreviation = c.abbreviation;
+      changed = true;
+    }
+  }
+  if (!state.rules) {
+    state.rules = {
+      rosterSize: ROSTER_SIZE,
+      benchSize: 6,
+      irSize: IR_SIZE,
+      draftRounds: DRAFT_ROUNDS,
+    };
+    for (const t of state.teams) t.legacyOverflow = Math.max(0, t.roster.length - ROSTER_SIZE);
+    if (state.phase === 'draft' && state.pick >= DRAFT_PICKS) {
+      state.phase = 'season';
+      for (const t of state.teams) t.lineup = optimalLineup(t.roster, players, (p) => p.basePpg);
+    }
+    changed = true;
+  }
+  if (state.statsSchema !== 2) {
+    state.observed = {};
+    for (let w = 1; w < state.week && w <= 18; w++)
+      for (const p of catalog.players) observeWeek(state, p, world[p.id][w - 1], w);
+    state.statsSchema = 2;
+    changed = true;
+  }
+  return changed;
+}
+export function submitClaim(state, team, claim, players, world) {
   ensure(state.phase === 'season', 'Waivers open after the draft.');
   ensure(!state.waiversProcessed, 'This week’s waiver run has finished. Use free agents.');
+  ensure(
+    !unresolvedIR(state, team, players, world),
+    'Activate or release recovered IR players before adding players.',
+  );
+  ensure(
+    team.roster.length <= ROSTER_SIZE,
+    'Resolve the extra bench players from your old save first.',
+  );
   ensure(
     Number.isInteger(claim.bid) && claim.bid >= 0 && claim.bid <= team.faab,
     'Bid a whole dollar amount within your FAAB balance.',
@@ -208,7 +453,7 @@ export function submitClaim(state, team, claim, players) {
   );
   ensure((state.availableAt[claim.add] ?? 1) <= state.week, 'A dropped player clears next week.');
   ensure(
-    canSwap(team.roster, claim.add, claim.drop, players),
+    canAcquire(team.roster, claim.add, claim.drop, players),
     'That add/drop would leave an incomplete roster.',
   );
   state.claims = state.claims.filter((c) => !(c.team === team.id && c.add === claim.add));
@@ -229,19 +474,22 @@ function botClaims(state, catalog, players, world) {
       const sorted = roster
         .filter((p) => !starters.has(p.id))
         .sort((a, b) => forecast(a, state.observed) - forecast(b, state.observed));
+      if (team.roster.length < ROSTER_SIZE) sorted.unshift(null);
       for (const drop of sorted) {
-        if (!canSwap(team.roster, add.id, drop.id, players)) continue;
+        if (!canAcquire(team.roster, add.id, drop?.id ?? null, players)) continue;
         const slotNeed =
           roster.filter(
             (p) => p.position === add.position && weekStatus(state, p, world) === 'ACTIVE',
           ).length < MIN_FOR(add.position);
         const gain =
-          forecast(add, state.observed) - forecast(drop, state.observed) + (slotNeed ? 6 : 0);
+          forecast(add, state.observed) -
+          (drop ? forecast(drop, state.observed) : 0) +
+          (slotNeed ? 6 : 0);
         const last = state.observed[add.id]?.last.at(-1) ?? 0;
         const hype =
           (1 - team.profile.skill) * Math.max(0, last / 100 - forecast(add, state.observed)) * 0.6;
         if (gain + hype > 1.2)
-          options.push({ add: add.id, drop: drop.id, gain: gain + hype, need: slotNeed });
+          options.push({ add: add.id, drop: drop?.id ?? null, gain: gain + hype, need: slotNeed });
         break;
       }
     }
@@ -262,7 +510,7 @@ function botClaims(state, catalog, players, world) {
   }
 }
 const MIN_FOR = (pos) => ({ QB: 1, RB: 2, WR: 2, TE: 1 })[pos];
-export function resolveClaims(state, players) {
+export function resolveClaims(state, players, world) {
   const ordered = standings(state),
     rank = new Map(ordered.map((t, i) => [t.id, i]));
   const sorted = [...state.claims].sort(
@@ -277,8 +525,10 @@ export function resolveClaims(state, players) {
     const valid =
       !ownerMap(state).has(c.add) &&
       c.bid <= team.faab &&
+      !unresolvedIR(state, team, players, world) &&
+      team.roster.length <= ROSTER_SIZE &&
       (state.availableAt[c.add] ?? 1) <= state.week &&
-      canSwap(team.roster, c.add, c.drop, players);
+      canAcquire(team.roster, c.add, c.drop, players);
     if (valid) {
       swap(state, team, c.add, c.drop, players, 'Waiver', c.bid);
       team.faab -= c.bid;
@@ -293,8 +543,9 @@ export function resolveClaims(state, players) {
 export function runWaivers(state, catalog, players, world) {
   ensure(state.phase === 'season', 'Waivers open during the season.');
   ensure(!state.waiversProcessed, 'Waivers have already processed this week.');
+  manageBotIR(state, catalog, players, world);
   botClaims(state, catalog, players, world);
-  return resolveClaims(state, players);
+  return resolveClaims(state, players, world);
 }
 export function weekMatchups(state) {
   const w = state.week;
@@ -337,13 +588,28 @@ export function weekMatchups(state) {
 }
 export function advanceWeek(state, catalog, players, world) {
   ensure(state.phase === 'season' && state.week <= 18, 'The season is complete.');
+  const human = state.teams[state.human];
+  ensure(
+    human.roster.length <= ROSTER_SIZE,
+    'Your old save has extra bench players. Release players or move eligible players to IR before kickoff.',
+  );
+  ensure(
+    !unresolvedIR(state, human, players, world),
+    'Activate or release recovered IR players before kickoff.',
+  );
   if (!state.waiversProcessed) runWaivers(state, catalog, players, world);
+  else manageBotIR(state, catalog, players, world);
+  fillBotVacancies(state, catalog, players, world);
   for (const t of state.teams) {
     if (t.id !== state.human) optimizeTeam(state, t, players, world);
     validateLineup(t, t.lineup, players);
   }
   const w = state.week,
     seed = state.playoffs?.seeds;
+  state.weekRecords ??= [];
+  state.weekRecords.push(
+    captureWeek(state, catalog, players, world, (p) => weeklyProjection(state, p, world)),
+  );
   state.lineupHistory.push(state.teams.map((t) => [...t.lineup]));
   for (const game of weekMatchups(state)) {
     const a = state.teams[game.a],
@@ -391,16 +657,7 @@ export function advanceWeek(state, catalog, players, world) {
     }
     if (game.kind === 'Championship') state.champion = winner;
   }
-  for (const p of catalog.players) {
-    const row = world[p.id][w - 1];
-    const record = state.observed[p.id] ?? { points: 0, games: 0, last: [] };
-    record.points += row[0];
-    if (row.at(-1)) {
-      record.games++;
-      record.last.push(row[0]);
-    }
-    state.observed[p.id] = record;
-  }
+  for (const p of catalog.players) observeWeek(state, p, world[p.id][w - 1], w);
   if (w === 14) state.playoffs = { seeds: standings(state).map((t) => t.id) };
   state.week++;
   state.waiversProcessed = false;
@@ -410,6 +667,7 @@ export function advanceWeek(state, catalog, players, world) {
     for (const t of state.teams) if (t.id !== state.human) optimizeTeam(state, t, players, world);
 }
 export function applyAction(state, action, catalog, players, world) {
+  hydrateLeague(state, catalog, players, world);
   const team = state.teams[state.human];
   const previousPhase = state.phase;
   switch (action.type) {
@@ -455,7 +713,13 @@ export function applyAction(state, action, catalog, players, world) {
       optimizeTeam(state, team, players, world);
       break;
     case 'claim':
-      submitClaim(state, team, { add: action.add, drop: action.drop, bid: action.bid }, players);
+      submitClaim(
+        state,
+        team,
+        { add: action.add, drop: action.drop, bid: action.bid },
+        players,
+        world,
+      );
       break;
     case 'cancelClaim':
       ensure(state.phase === 'season' && !state.waiversProcessed, 'This waiver run is closed.');
@@ -465,6 +729,10 @@ export function applyAction(state, action, catalog, players, world) {
       runWaivers(state, catalog, players, world);
       break;
     case 'add':
+      ensure(
+        !unresolvedIR(state, team, players, world),
+        'Activate or release recovered IR players before adding players.',
+      );
       ensure(
         state.phase === 'season' && (state.week === 1 || state.waiversProcessed),
         'Process this week’s waivers before free-agent pickups.',
@@ -479,6 +747,15 @@ export function applyAction(state, action, catalog, players, world) {
       );
       swap(state, team, action.add, action.drop, players, 'Free agent');
       break;
+    case 'reserve':
+      moveToIR(state, team, action.player, players, world);
+      break;
+    case 'activate':
+      activateIR(state, team, action.player, action.drop ?? null, players);
+      break;
+    case 'release':
+      releasePlayer(state, team, action.player, players);
+      break;
     case 'advance':
       advanceWeek(state, catalog, players, world);
       break;
@@ -492,21 +769,31 @@ export function applyAction(state, action, catalog, players, world) {
   return state;
 }
 export function assertLeague(state, players) {
-  const rosters = state.teams.flatMap((t) => t.roster);
+  const rosters = state.teams.flatMap((t) => [...t.roster, ...(t.ir ?? [])]);
   ensure(new Set(rosters).size === rosters.length, 'A player belongs to two teams.');
   ensure(
-    state.teams.every((t) => t.roster.length <= 16 && t.faab >= 0),
+    state.teams.every(
+      (t) =>
+        t.roster.length <= ROSTER_SIZE + (t.legacyOverflow ?? 0) &&
+        (t.ir ?? []).length <= IR_SIZE &&
+        t.faab >= 0,
+    ),
     'Invalid roster or budget.',
   );
   if (state.phase !== 'draft')
     for (const t of state.teams) {
-      ensure(t.roster.length === 16 && rosterComplete(t.roster, players), 'Incomplete roster.');
+      ensure(t.legacyOverflow || rosterFeasible(t.roster, players), 'Incomplete roster.');
       validateLineup(t, t.lineup, players);
     }
 }
 export function publicState(state, catalog, players, world) {
-  const { world: privateWorld, rng, claims, ...safe } = structuredClone(state);
+  hydrateLeague(state, catalog, players, world);
+  const { world: privateWorld, rng, claims, weekRecords, ...safe } = structuredClone(state);
   safe.claims = claims.filter((c) => c.team === state.human);
+  safe.positionRanks = currentRanks(state, catalog);
+  safe.injuryReports = Object.fromEntries(
+    catalog.players.map((p) => [p.id, injuryReport(state, p, world)]),
+  );
   // Current availability is public news; future points, participation and world selection are private.
   safe.playerStatus = Object.fromEntries(
     catalog.players.map((p) => [p.id, weekStatus(state, p, world)]),
@@ -523,5 +810,8 @@ export function publicState(state, catalog, players, world) {
   safe.matchups =
     state.phase === 'draft' ? [] : state.phase === 'complete' ? [] : weekMatchups(state);
   safe.standings = standings(state).map((t) => t.id);
+  safe.latestRecap = weeklyRecap(state, catalog, Math.min(18, state.week - 1));
+  safe.seasonRecap = yearlyRecap(state, catalog);
+  safe.recapWeeks = (state.weekRecords ?? []).map((r) => r.week);
   return safe;
 }

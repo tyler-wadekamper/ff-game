@@ -37,7 +37,7 @@ def export_game(root,worlds=12,seed=20261101):
     players.sort(key=lambda p:p['adp'])
     version=hashlib.sha256(json.dumps(players,sort_keys=True).encode()).hexdigest()[:16]
     catalog={'version':version,'players':players,'scoring':'Full PPR · 4 pt passing TD · no return/2-point bonuses',
-             'slots':['QB','RB','RB','WR','WR','TE','FLEX','FLEX'],'rosterSize':16,'calendarWeeks':18}
+             'slots':['QB','RB','RB','WR','WR','TE','FLEX','FLEX'],'rosterSize':14,'benchSize':6,'irSize':2,'seasonYear':2026,'calendarWeeks':18}
     (out/'catalog.json').write_text(json.dumps(catalog,separators=(',',':'),allow_nan=False)+'\n')
     panel=pd.read_csv(root/'data/processed/player_seasons.csv')
     # Rebuild from source CSVs; do not deserialize untrusted pickle data.

@@ -1,0 +1,653 @@
+{
+  "passed": true,
+  "freshUniverses": 100,
+  "continuedUniverses": 20,
+  "sourceWorlds": 12,
+  "playersPerUniverse": 972,
+  "generatedPlayerSeasons": 116640,
+  "universeFingerprint": "03986f2efba53e1b502aa823ccec76a05a2f91b97dd2ba806085f3aa25a48f06",
+  "nearZeroMedianTolerance": "q50 allows max(1.2 PPR, 12%); relative changes around zero are unstable",
+  "comparison": "Regression against packaged empirically validated pools; not a new independent NFL holdout.",
+  "rows": [
+    {
+      "position": "QB",
+      "season": 1,
+      "metric": "population",
+      "baseline": 130,
+      "generated": 130,
+      "relativeDifference": 0,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 1,
+      "metric": "totalPpr",
+      "baseline": 7939.944999999999,
+      "generated": 7953.987999999999,
+      "relativeDifference": 0.001768652049856767,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 1,
+      "metric": "q50",
+      "baseline": 0.43,
+      "generated": 0.49829999999999985,
+      "relativeDifference": 0.15883720930232537,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 1,
+      "metric": "q90",
+      "baseline": 241.1498333333334,
+      "generated": 240.9832600000001,
+      "relativeDifference": -0.0006907462096523709,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 1,
+      "metric": "q99",
+      "baseline": 369.8966499999999,
+      "generated": 373.37231999999995,
+      "relativeDifference": 0.009396327325484233,
+      "tolerance": 0.16,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 1,
+      "metric": "meanGames",
+      "baseline": 4.578205128205128,
+      "generated": 4.5849230769230775,
+      "relativeDifference": 0.0014673760851304785,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 1,
+      "metric": "usefulWeeklySd",
+      "baseline": 7.261179792797922,
+      "generated": 7.305528317113202,
+      "relativeDifference": 0.0061076196404430405,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 1,
+      "metric": "fortyPointRate",
+      "baseline": 0.006435870612234276,
+      "generated": 0.006654219478232014,
+      "relativeDifference": 0.03392685763176595,
+      "tolerance": 0.6,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 2,
+      "metric": "population",
+      "baseline": 130,
+      "generated": 130,
+      "relativeDifference": 0,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 2,
+      "metric": "totalPpr",
+      "baseline": 7939.944999999999,
+      "generated": 7994.586,
+      "relativeDifference": 0.0068817857050649245,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 2,
+      "metric": "q50",
+      "baseline": 0.43,
+      "generated": 0.3145,
+      "relativeDifference": -0.26860465116279064,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 2,
+      "metric": "q90",
+      "baseline": 241.1498333333334,
+      "generated": 245.0842000000001,
+      "relativeDifference": 0.016315029590870056,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 2,
+      "metric": "q99",
+      "baseline": 369.8966499999999,
+      "generated": 376.5365599999999,
+      "relativeDifference": 0.017950716774536746,
+      "tolerance": 0.16,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 2,
+      "metric": "meanGames",
+      "baseline": 4.578205128205128,
+      "generated": 4.571923076923077,
+      "relativeDifference": -0.0013721646597592008,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 2,
+      "metric": "usefulWeeklySd",
+      "baseline": 7.261179792797922,
+      "generated": 7.226109741384489,
+      "relativeDifference": -0.004829800723047395,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "QB",
+      "season": 2,
+      "metric": "fortyPointRate",
+      "baseline": 0.006435870612234276,
+      "generated": 0.006555483782416781,
+      "relativeDifference": 0.01858539075585597,
+      "tolerance": 0.6,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 1,
+      "metric": "population",
+      "baseline": 232,
+      "generated": 232,
+      "relativeDifference": 0,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 1,
+      "metric": "totalPpr",
+      "baseline": 10513.873333333331,
+      "generated": 10564.938399999995,
+      "relativeDifference": 0.00485692237748081,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 1,
+      "metric": "q50",
+      "baseline": 2.629166666666667,
+      "generated": 2.5064999999999995,
+      "relativeDifference": -0.04665610142630772,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 1,
+      "metric": "q90",
+      "baseline": 171.32616666666672,
+      "generated": 171.69770000000008,
+      "relativeDifference": 0.002168573199073709,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 1,
+      "metric": "q99",
+      "baseline": 305.0139333333333,
+      "generated": 309.7539099999999,
+      "relativeDifference": 0.015540197180063053,
+      "tolerance": 0.16,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 1,
+      "metric": "meanGames",
+      "baseline": 6.769037356321839,
+      "generated": 6.773362068965518,
+      "relativeDifference": 0.0006388962589547464,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 1,
+      "metric": "usefulWeeklySd",
+      "baseline": 6.856983127405793,
+      "generated": 6.883688785828261,
+      "relativeDifference": 0.0038946659086460667,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 1,
+      "metric": "fortyPointRate",
+      "baseline": 0.0032919758881082457,
+      "generated": 0.003119844485414057,
+      "relativeDifference": -0.05228817237574146,
+      "tolerance": 0.6,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 2,
+      "metric": "population",
+      "baseline": 232,
+      "generated": 232,
+      "relativeDifference": 0,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 2,
+      "metric": "totalPpr",
+      "baseline": 10513.873333333331,
+      "generated": 10724.994999999997,
+      "relativeDifference": 0.02008029391007815,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 2,
+      "metric": "q50",
+      "baseline": 2.629166666666667,
+      "generated": 3.5150000000000006,
+      "relativeDifference": 0.33692551505546753,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 2,
+      "metric": "q90",
+      "baseline": 171.32616666666672,
+      "generated": 168.098,
+      "relativeDifference": -0.018842227836378567,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 2,
+      "metric": "q99",
+      "baseline": 305.0139333333333,
+      "generated": 300.77831,
+      "relativeDifference": -0.013886655232580591,
+      "tolerance": 0.16,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 2,
+      "metric": "meanGames",
+      "baseline": 6.769037356321839,
+      "generated": 6.80926724137931,
+      "relativeDifference": 0.005943221013531286,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 2,
+      "metric": "usefulWeeklySd",
+      "baseline": 6.856983127405793,
+      "generated": 6.861446707406996,
+      "relativeDifference": 0.0006509539134438302,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "RB",
+      "season": 2,
+      "metric": "fortyPointRate",
+      "baseline": 0.0032919758881082457,
+      "generated": 0.003292783726921585,
+      "relativeDifference": 0.0002453963336297438,
+      "tolerance": 0.6,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 1,
+      "metric": "population",
+      "baseline": 402,
+      "generated": 402,
+      "relativeDifference": 0,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 1,
+      "metric": "totalPpr",
+      "baseline": 15341.775000000003,
+      "generated": 15372.542000000001,
+      "relativeDifference": 0.0020054393966797424,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 1,
+      "metric": "q50",
+      "baseline": 0,
+      "generated": 0,
+      "relativeDifference": 0,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 1,
+      "metric": "q90",
+      "baseline": 142.51900000000012,
+      "generated": 143.02472000000006,
+      "relativeDifference": 0.0035484391554805317,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 1,
+      "metric": "q99",
+      "baseline": 292.6569500000002,
+      "generated": 292.90666600000026,
+      "relativeDifference": 0.0008532720647844716,
+      "tolerance": 0.16,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 1,
+      "metric": "meanGames",
+      "baseline": 5.747512437810946,
+      "generated": 5.742164179104475,
+      "relativeDifference": -0.0009305345163390655,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 1,
+      "metric": "usefulWeeklySd",
+      "baseline": 6.648615058707698,
+      "generated": 6.6676191099656625,
+      "relativeDifference": 0.0028583473535703785,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 1,
+      "metric": "fortyPointRate",
+      "baseline": 0.002258632213699464,
+      "generated": 0.0023175928618973164,
+      "relativeDifference": 0.02610458127721449,
+      "tolerance": 0.6,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 2,
+      "metric": "population",
+      "baseline": 402,
+      "generated": 402,
+      "relativeDifference": 0,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 2,
+      "metric": "totalPpr",
+      "baseline": 15341.775000000003,
+      "generated": 15913.117999999999,
+      "relativeDifference": 0.037240997211860805,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 2,
+      "metric": "q50",
+      "baseline": 0,
+      "generated": 0,
+      "relativeDifference": 0,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 2,
+      "metric": "q90",
+      "baseline": 142.51900000000012,
+      "generated": 145.04490000000007,
+      "relativeDifference": 0.017723250934962742,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 2,
+      "metric": "q99",
+      "baseline": 292.6569500000002,
+      "generated": 294.1819300000001,
+      "relativeDifference": 0.005210810814504363,
+      "tolerance": 0.16,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 2,
+      "metric": "meanGames",
+      "baseline": 5.747512437810946,
+      "generated": 5.901616915422886,
+      "relativeDifference": 0.0268123782731009,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 2,
+      "metric": "usefulWeeklySd",
+      "baseline": 6.648615058707698,
+      "generated": 6.6206574345445475,
+      "relativeDifference": -0.0042050297567662875,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "WR",
+      "season": 2,
+      "metric": "fortyPointRate",
+      "baseline": 0.002258632213699464,
+      "generated": 0.002353270354239218,
+      "relativeDifference": 0.04190064232934332,
+      "tolerance": 0.6,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 1,
+      "metric": "population",
+      "baseline": 208,
+      "generated": 208,
+      "relativeDifference": 0,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 1,
+      "metric": "totalPpr",
+      "baseline": 5830.996666666667,
+      "generated": 5849.023199999999,
+      "relativeDifference": 0.0030915012242043183,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 1,
+      "metric": "q50",
+      "baseline": 0.10000000000000002,
+      "generated": 0.10800000000000001,
+      "relativeDifference": 0.07999999999999985,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 1,
+      "metric": "q90",
+      "baseline": 103.32833333333342,
+      "generated": 103.98790000000007,
+      "relativeDifference": 0.006383212090907531,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 1,
+      "metric": "q99",
+      "baseline": 212.38833333333343,
+      "generated": 213.04242000000013,
+      "relativeDifference": 0.003079673240055758,
+      "tolerance": 0.16,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 1,
+      "metric": "meanGames",
+      "baseline": 6.866185897435898,
+      "generated": 6.88461538461538,
+      "relativeDifference": 0.0026840938265835224,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 1,
+      "metric": "usefulWeeklySd",
+      "baseline": 5.367695456538313,
+      "generated": 5.405292003623495,
+      "relativeDifference": 0.007004225070069037,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 1,
+      "metric": "fortyPointRate",
+      "baseline": 0.00040432772044355297,
+      "generated": 0.00047695278021323917,
+      "relativeDifference": 0.17961929419535116,
+      "tolerance": 0.6,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 2,
+      "metric": "population",
+      "baseline": 208,
+      "generated": 208,
+      "relativeDifference": 0,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 2,
+      "metric": "totalPpr",
+      "baseline": 5830.996666666667,
+      "generated": 5890.16,
+      "relativeDifference": 0.010146350052220754,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 2,
+      "metric": "q50",
+      "baseline": 0.10000000000000002,
+      "generated": 0.06000000000000001,
+      "relativeDifference": -0.4,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 2,
+      "metric": "q90",
+      "baseline": 103.32833333333342,
+      "generated": 100.43300000000008,
+      "relativeDifference": -0.028020710679549032,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 2,
+      "metric": "q99",
+      "baseline": 212.38833333333343,
+      "generated": 211.88415000000003,
+      "relativeDifference": -0.002373874898966788,
+      "tolerance": 0.16,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 2,
+      "metric": "meanGames",
+      "baseline": 6.866185897435898,
+      "generated": 6.893028846153847,
+      "relativeDifference": 0.003909441008285608,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 2,
+      "metric": "usefulWeeklySd",
+      "baseline": 5.367695456538313,
+      "generated": 5.275919743969168,
+      "relativeDifference": -0.01709778680855567,
+      "tolerance": 0.12,
+      "pass": true
+    },
+    {
+      "position": "TE",
+      "season": 2,
+      "metric": "fortyPointRate",
+      "baseline": 0.00040432772044355297,
+      "generated": 0.00030988101025294343,
+      "relativeDifference": -0.23358950033650971,
+      "tolerance": 0.6,
+      "pass": true
+    }
+  ]
+}
