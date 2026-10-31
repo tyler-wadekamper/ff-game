@@ -1,6 +1,6 @@
 # Fourth & Forever: initial playable game
 
-The game is a browser-first, phone-friendly single-player fantasy football simulator. A user drafts against eleven managers, sets lineups, makes waiver decisions and plays through the season at their own pace. Player identities are fictional; football clubs and fantasy franchises use NFL city markets and abbreviations, without mascots. The existing empirical player histories, ADP and weekly generator supply the actual player universe.
+The game is a browser-first, phone-friendly single-player fantasy football simulator. A user drafts against eleven managers, sets lineups, makes waiver decisions and plays through the season at their own pace. New universes use real NFL identities with randomized career ages and simulated history/future statistics; football clubs and fantasy franchises use NFL city markets and abbreviations, without mascots. The existing empirical player histories, ADP and weekly generator supply the actual player universe.
 
 ## Platform and revenue decision
 
@@ -89,3 +89,8 @@ npm run data:game
 ```
 
 The packaged data is committed for immediate play. Live save files are ignored by Git. The browser test creates temporary leagues and removes them afterward. See [the executed playtest report](../reports/GAME_PLAYTEST.md) for measured behavior and screenshots.
+
+
+## Real-player universes
+
+See [the real-player report](../reports/REAL_PLAYER_UNIVERSES.md). New universes use a versioned, compact 2015–2025 career library. Existing fictional universe recipes reconstruct their original players and outcomes exactly. A separate private outcome seed allows different future seasons with identical names, ages, histories and ADP. No actual named player’s next historical season is replayed as the game future.

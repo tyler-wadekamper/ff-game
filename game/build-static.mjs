@@ -25,7 +25,12 @@ export async function buildStatic(destination = path.join(root, '../_site')) {
   for (const name of modules) await fs.copyFile(path.join(root, name), path.join(target, name));
   for (const name of ['demo-boot.mjs', 'demo-worker.mjs'])
     await fs.copyFile(path.join(root, 'browser', name), path.join(target, name));
-  for (const name of ['catalog.json', 'worlds.json.gz', 'adp-model.json.gz'])
+  for (const name of [
+    'catalog.json',
+    'worlds.json.gz',
+    'adp-model.json.gz',
+    'real-players.json.gz',
+  ])
     await fs.copyFile(path.join(root, 'data', name), path.join(target, name));
   let html = await fs.readFile(path.join(root, 'public/index.html'), 'utf8');
   html = html.replaceAll('href="/', 'href="./').replace('src="/app.js"', 'src="./demo-boot.mjs"');
@@ -48,6 +53,7 @@ export async function buildStatic(destination = path.join(root, '../_site')) {
     './catalog.json',
     './worlds.json.gz',
     './adp-model.json.gz',
+    './real-players.json.gz',
   ];
   const hash = createHash('sha256');
   for (const asset of assets.filter((a) => a !== './'))

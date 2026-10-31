@@ -6,7 +6,7 @@
 
 For free public hosting, use the [browser edition and GitHub Pages publisher](docs/FREE_HOSTING.md). It runs the same game entirely on the player's device, supports offline play and full backup export/import. The Node server below remains available for server-owned saves and private outcomes.
 
-**Fourth & Forever** is now a playable browser game built on this player model. Draft against eleven different managers, set your lineup, compete for an eighteen-week season, bid on waivers and chase the championship. The layout supports desktop and phones, with an installable PWA shell.
+**Fourth & Forever** is a playable browser game with real NFL identities, randomized career ages and alternate-career outcomes. Each new universe draws 972 players from a 2,752-player career library; future results are sampled from history-compatible empirical scenarios. Draft against eleven different managers, set your lineup, compete for an eighteen-week season, bid on waivers and chase the championship. The layout supports desktop and phones, with an installable PWA shell.
 
 ```sh
 npm ci
@@ -16,7 +16,7 @@ npm start
 
 Node 22+ is sufficient to play. The empirical source catalog, historical ADP kernel and twelve pre-generated football source worlds are packaged in `game/data/`; no NFL download, Python process or third-party API is needed at runtime. Saves persist in `game/saves/`. Keep that directory on persistent storage when hosting. Recovery files resume a league on the same server; the game requires a network connection to that server.
 
-[New profiles, recaps and universe evidence](reports/GAME_EXPERIENCE.md) · [Gameplay evidence and screenshots](reports/GAME_PLAYTEST.md) · [Rules, draft-strategy research and platform/revenue decision](docs/GAME_DESIGN.md)
+[Real players and future variation](reports/REAL_PLAYER_UNIVERSES.md) · [Profiles, recaps and universe evidence](reports/GAME_EXPERIENCE.md) · [Gameplay evidence and screenshots](reports/GAME_PLAYTEST.md) · [Rules, draft-strategy research and platform/revenue decision](docs/GAME_DESIGN.md)
 
 ```sh
 npm test                    # Engine, universe, experience and HTTP checks
@@ -25,6 +25,8 @@ npm run test:browser        # Complete browser season; Chromium required
 npm run test:static         # Offline play, IR, recaps, continuation and fresh worlds
 npm run validate:universes  # 100 fresh + 20 continued universe distribution checks
 npm run validate:market     # Browser/Python ADP parity; research data + venv needed
+npm run validate:real-players # Fixed histories, 50 different future scenarios
+npm run data:real-players   # Rebuild the real career library from cached NFL data
 npm run data:game           # Repackage after rebuilding the research data
 .venv/bin/python -m ffsim.game_report  # Refresh gameplay evidence after playtests
 ```
@@ -107,7 +109,7 @@ cost(i,j) = squared standardized feature distance
 
 The conditional kernel and game-bootstrap settings were selected on 2019–2022 development folds using distribution distances, with zero-jitter copying retained only as an ablation. Role penalties, matching temperature, history perturbation and score display rules are explicit game-design choices. Population distribution fidelity is **a construction constraint**, not an independent discovery or a claim that every underlying causal parameter has been estimated.
 
-Game-facing files contain fictional IDs, no NFL names/teams/GSIS IDs. This is not formal anonymization: historical shapes may remain recognizable. The engine does not yet fit medical injury hazards, simulate shared team play-by-play, run a fantasy draft, or validate multi-decade career progression.
+The archived research artifacts contain fictional IDs, without NFL names/teams/GSIS IDs. The playable game now deliberately uses real identities from the separate career library, with randomized ages and simulated statistics; existing fictional saves remain supported. This is not formal anonymization: historical shapes may remain recognizable. The engine does not yet fit medical injury hazards, simulate shared team play-by-play, run a fantasy draft, or validate multi-decade career progression.
 
 ## Reliability and the 0–100 index
 

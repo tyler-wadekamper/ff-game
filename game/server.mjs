@@ -16,10 +16,14 @@ export function loadData() {
   if (catalog.version !== privateData.version)
     throw new Error('Game data versions differ. Run npm run data:game.');
   const adpModel = JSON.parse(gunzipSync(readFileSync(path.join(ROOT, 'data/adp-model.json.gz'))));
+  const realPlayers = JSON.parse(
+    gunzipSync(readFileSync(path.join(ROOT, 'data/real-players.json.gz'))),
+  );
   return {
     catalog,
     privateData,
     adpModel,
+    realPlayers,
     players: new Map(catalog.players.map((p) => [p.id, p])),
   };
 }

@@ -1,7 +1,7 @@
 {
-  "queries": 72,
+  "queries": 144,
   "maxFeatureDifference": 1.1368683772161603e-13,
-  "maxLogPriorityDifference": 8.577796757336387e-07,
+  "maxLogPriorityDifference": 1.1641404431550484e-06,
   "passed": true,
   "reference": "Independent Python/sklearn kernel and calendar history feature extraction"
 }

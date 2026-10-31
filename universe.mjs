@@ -99,7 +99,8 @@ export function historyFeatures(p, year) {
     ...(byYear.get(year - 3 + i) ?? {}),
   }));
   const get = (r, k) => Number(r[k] ?? 0),
-    ppr17 = (r) => (get(r, 'ppr') * 17) / (r.year >= 2021 ? 17 : 16);
+    scheduled = (r) => r.scheduled_games ?? (r.year >= 2021 ? 17 : 16),
+    ppr17 = (r) => (get(r, 'ppr') * 17) / scheduled(r);
   const last = tail[2],
     games = Math.max(1, get(last, 'games')),
     pp = tail.map(ppr17);
@@ -124,7 +125,7 @@ export function historyFeatures(p, year) {
     get(last, 'receiving_yards') / games,
     (get(last, 'passing_tds') + get(last, 'rushing_tds') + get(last, 'receiving_tds')) / games,
     get(last, 'listed_out_weeks'),
-    tail.reduce((n, r) => n + get(r, 'games') / (r.year >= 2021 ? 17 : 16), 0) / 3,
+    tail.reduce((n, r) => n + get(r, 'games') / scheduled(r), 0) / 3,
     p.history.length ? (productive.length ? year - Math.max(...productive) - 1 : 5) : 0,
     p.history.length ? 0 : 1,
   ];
@@ -186,14 +187,23 @@ function roleVector(p) {
     (last.games ?? 0) / 17,
   ];
 }
-function allocateWorld(players, base, source, seed) {
+function allocateWorld(players, base, source, seed, realMode = false) {
   const random = seededRandom(seed),
     world = {},
     sourceMap = {};
   for (const pos of ['QB', 'RB', 'WR', 'TE']) {
     const targets = players
       .filter((p) => p.position === pos)
-      .map((p) => ({ p, order: p.basePpg + random() * 2 }))
+      .map((p) => ({
+        p,
+        order:
+          p.basePpg +
+          random() * 2 +
+          (realMode && pos === 'QB'
+            ? (0.15 * (p.history.at(-1)?.rushing_yards ?? 0)) /
+              Math.max(1, p.history.at(-1)?.games ?? 0)
+            : 0),
+      }))
       .sort((a, b) => b.order - a.order);
     const supply = base.players
       .filter((p) => p.position === pos)
@@ -217,7 +227,7 @@ function allocateWorld(players, base, source, seed) {
                 : k === 2
                   ? 0.5
                   : 1;
-          distance += weight * (x[k] - supply[n].x[k]) ** 2;
+          distance += (realMode ? realWeights(pos)[k] : weight) * (x[k] - supply[n].x[k]) ** 2;
         }
         distance -= 0.12 * -Math.log(-Math.log(Math.max(0.00001, random())));
         if (distance < cost) {
@@ -252,8 +262,190 @@ function allocateWorld(players, base, source, seed) {
   }
   return { world, sourceMap };
 }
+// A real identity selects a past career checkpoint, never that checkpoint's
+// actual successor. Histories are 17-game-equivalent alternate-career lines.
+const checkpointLibraries = new WeakMap();
+const REAL_ROLE_WEIGHTS = Object.fromEntries(
+  ['QB', 'RB', 'WR', 'TE'].map((pos) => [
+    pos,
+    [pos === 'QB' ? 16 : 8, 2, 6.25, pos === 'QB' ? 2 : 0.4, pos === 'RB' ? 1.5 : 0.6, 1],
+  ]),
+);
+const realWeights = (pos) => REAL_ROLE_WEIGHTS[pos];
+function realDistance(a, b, pos) {
+  const weights = realWeights(pos);
+  let cost = 0;
+  for (let k = 0; k < a.length; k++) cost += weights[k] * (a[k] - b[k]) ** 2;
+  return cost;
+}
+function careerCheckpoints(library) {
+  if (checkpointLibraries.has(library)) return checkpointLibraries.get(library);
+  const result = { QB: [], RB: [], WR: [], TE: [] };
+  for (const person of library.players)
+    person.states.forEach((last, checkpoint) => {
+      const recent = person.states.slice(Math.max(0, checkpoint - 2), checkpoint + 1).reverse(),
+        weights = [0.6, 0.3, 0.1].slice(0, recent.length),
+        sum = weights.reduce((a, b) => a + b, 0);
+      const ppg = recent.reduce(
+        (n, h, i) => n + ((weights[i] / sum) * pointsCents(h)) / 100 / Math.max(1, h.games),
+        0,
+      );
+      const health = recent.reduce(
+          (n, h, i) => n + ((weights[i] / sum) * h.games) / h.scheduled_games,
+          0,
+        ),
+        games = Math.max(1, last.games);
+      result[person.position].push({
+        person,
+        checkpoint,
+        x: [
+          (ppg * (0.8 + 0.2 * health)) / { QB: 10, RB: 7, WR: 7, TE: 5 }[person.position],
+          Math.log1p((last.attempts + last.carries + last.targets) / games),
+          (last.age + 1) / 10,
+          last.rushing_yards / games / 30,
+          last.targets / games / 5,
+          last.games / last.scheduled_games,
+        ],
+      });
+    });
+  checkpointLibraries.set(library, result);
+  return result;
+}
+function realCohort(library, base, random) {
+  const candidates = careerCheckpoints(library),
+    selected = [],
+    usedIds = new Set(),
+    usedNames = new Set(),
+    usedSlots = new Set();
+  const take = (row, slot) => {
+    selected.push(row);
+    usedIds.add(row.person.id);
+    usedNames.add(row.person.name);
+    usedSlots.add(slot.id);
+  };
+  // Familiar faces occupy compatible roles rather than adding extra star roles.
+  for (const name of [
+    'Lamar Jackson',
+    'Patrick Mahomes',
+    'Christian McCaffrey',
+    'Justin Jefferson',
+    'Travis Kelce',
+  ]) {
+    const person = library.players.find((p) => p.name === name);
+    if (!person) continue;
+    const options = candidates[person.position].filter((c) => c.person.id === person.id),
+      row = options[Math.floor(random() * options.length)];
+    const slots = base.players.filter(
+      (p) => p.position === person.position && !usedSlots.has(p.id),
+    );
+    slots.sort(
+      (a, b) =>
+        realDistance(row.x, roleVector(a), person.position) -
+        realDistance(row.x, roleVector(b), person.position),
+    );
+    take(row, slots[0]);
+  }
+  for (const pos of ['QB', 'RB', 'WR', 'TE']) {
+    const slots = base.players
+      .filter((p) => p.position === pos && !usedSlots.has(p.id))
+      .sort((a, b) => b.basePpg - a.basePpg);
+    for (const slot of slots) {
+      const target = roleVector(slot);
+      let winner = null,
+        best = Infinity;
+      for (const row of candidates[pos]) {
+        if (usedIds.has(row.person.id) || usedNames.has(row.person.name)) continue;
+        const noise = -Math.log(-Math.log(Math.max(0.00001, random())));
+        const cost =
+          realDistance(row.x, target, pos) +
+          0.04 * (2025 - row.person.states[row.checkpoint].season) -
+          0.3 * noise;
+        if (cost < best) {
+          best = cost;
+          winner = row;
+        }
+      }
+      if (!winner) throw Error('The real-player source pool is incomplete.');
+      take(winner, slot);
+    }
+  }
+  return selected;
+}
+function realInitialUniverse(spec, baseData) {
+  const { catalog: base, privateData, adpModel, realPlayers } = baseData,
+    random = seededRandom(spec.seed);
+  const players = realCohort(realPlayers, base, random).map(({ person, checkpoint }) => {
+    const anchor = person.states[checkpoint];
+    const prefix = person.states.slice(0, checkpoint + 1);
+    const elapsed = anchor.season - prefix[0].season;
+    const age = clamp(
+      anchor.age + 1 + Math.floor(random() * 3) - 1,
+      21 + elapsed,
+      { QB: 46, RB: 38, WR: 42, TE: 42 }[person.position],
+    );
+    const id = `${person.position}-${person.id}-${hashText(spec.id).toString(36)}`;
+    const history = prefix.map((row) => {
+      const box = scaledBox(row, (17 / row.scheduled_games) * traits(spec.seed, id));
+      box.games = Math.min(17, Math.round((row.games * 17) / row.scheduled_games));
+      return {
+        ...box,
+        age: age - 1 + row.season - anchor.season,
+        relative_season: row.season - anchor.season,
+        scheduled_games: 17,
+        ppr: pointsCents(box) / 100,
+        listed_out_weeks: row.listed_out_weeks,
+      };
+    });
+    const player = {
+      id,
+      name: person.name,
+      realPlayerId: person.id,
+      position: person.position,
+      age,
+      history,
+      club: null,
+      historyKind: 'alternate-career',
+      ageRandomized: true,
+    };
+    updateScouting(player);
+    return player;
+  });
+  const clubs = scheduleClubs(base, spec.seed);
+  assignClubs(players, clubs, spec.seed);
+  pricePlayers(players, 2026, adpModel, spec.seed);
+  const outcomeSeed = spec.outcomeSeed ?? hashText(spec.seed + ':outcomes');
+  const outcomeRandom = seededRandom(outcomeSeed);
+  const allocation = allocateWorld(
+    players,
+    base,
+    privateData.worlds[Math.floor(outcomeRandom() * privateData.worlds.length)],
+    outcomeSeed,
+    true,
+  );
+  return {
+    catalog: retainFinishes({
+      ...base,
+      version: contextVersion(base, spec),
+      seasonYear: 2026,
+      rosterSize: 14,
+      identityMode: 'real',
+      historyKind: 'alternate-career',
+      clubs,
+      players,
+    }),
+    world: allocation.world,
+    usedRealIds: players.map((p) => p.realPlayerId),
+  };
+}
+
 function contextVersion(base, spec) {
-  return base.version + ':u1:' + spec.id + ':' + spec.season;
+  return (
+    base.version +
+    (spec.identityMode === 'real' ? ':r1:' + spec.realVersion + ':' : ':u1:') +
+    spec.id +
+    ':' +
+    spec.season
+  );
 }
 function retainFinishes(catalog) {
   const ranks = historicalRanks(catalog);
@@ -302,6 +494,8 @@ function initialUniverse(spec, baseData) {
 function nextUniverse(previous, spec, baseData, season) {
   retainFinishes(previous.catalog);
   const usedNames = new Set(previous.catalog.players.map((p) => p.name));
+  const realMode = spec.identityMode === 'real',
+    usedRealIds = new Set(previous.usedRealIds ?? []);
   const random = seededRandom(hashText(spec.seed + ':year:' + season)),
     year = 2025 + season;
   const finishes = {};
@@ -335,6 +529,7 @@ function nextUniverse(previous, spec, baseData, season) {
       ...totals,
       age: p.age,
       relative_season: 0,
+      ...(realMode ? { scheduled_games: 17 } : {}),
       ppr: pointsCents(totals) / 100,
       positionFinish: finishes[p.id] ?? null,
       listed_out_weeks: Array.from({ length: 18 }, (_, i) => i + 1).filter(
@@ -353,14 +548,32 @@ function nextUniverse(previous, spec, baseData, season) {
         history: [],
         club: p.club,
       };
-      const a = FIRST[Math.floor(random() * FIRST.length)],
-        b = LAST[Math.floor(random() * LAST.length)];
-      next.name = a + ' ' + b;
-      while (usedNames.has(next.name))
-        next.name =
-          FIRST[Math.floor(random() * FIRST.length)] +
-          ' ' +
-          LAST[Math.floor(random() * LAST.length)];
+      if (realMode) {
+        const pool = baseData.realPlayers.players.filter(
+          (candidate) =>
+            candidate.position === p.position &&
+            !usedRealIds.has(candidate.id) &&
+            !usedNames.has(candidate.name),
+        );
+        const candidate = pool[Math.floor(random() * pool.length)];
+        if (candidate) {
+          next.name = candidate.name;
+          next.realPlayerId = candidate.id;
+          next.ageRandomized = true;
+          next.historyKind = 'alternate-career';
+          usedRealIds.add(candidate.id);
+        } else next.generatedProspect = true;
+      }
+      if (!next.name) {
+        const a = FIRST[Math.floor(random() * FIRST.length)],
+          b = LAST[Math.floor(random() * LAST.length)];
+        next.name = a + ' ' + b;
+        while (usedNames.has(next.name))
+          next.name =
+            FIRST[Math.floor(random() * FIRST.length)] +
+            ' ' +
+            LAST[Math.floor(random() * LAST.length)];
+      }
       usedNames.add(next.name);
     }
     updateScouting(next);
@@ -369,24 +582,25 @@ function nextUniverse(previous, spec, baseData, season) {
   const clubs = scheduleClubs(baseData.catalog, hashText(spec.seed + ':byes:' + season));
   assignClubs(players, clubs, spec.seed, true);
   pricePlayers(players, year, baseData.adpModel, hashText(spec.seed + ':market:' + season));
+  const footballSeed = realMode
+    ? hashText((spec.outcomeSeed ?? hashText(spec.seed + ':outcomes')) + ':football:' + season)
+    : hashText(spec.seed + ':football:' + season);
+  const footballRandom = realMode ? seededRandom(footballSeed) : random;
   const selected =
-    baseData.privateData.worlds[Math.floor(random() * baseData.privateData.worlds.length)];
-  const allocation = allocateWorld(
-    players,
-    baseData.catalog,
-    selected,
-    hashText(spec.seed + ':football:' + season),
-  );
+    baseData.privateData.worlds[Math.floor(footballRandom() * baseData.privateData.worlds.length)];
+  const allocation = allocateWorld(players, baseData.catalog, selected, footballSeed);
   return {
     catalog: {
       ...baseData.catalog,
       version: contextVersion(baseData.catalog, { ...spec, season }),
       seasonYear: year,
       rosterSize: 14,
+      ...(realMode ? { identityMode: 'real', historyKind: 'alternate-career' } : {}),
       clubs,
       players,
     },
     world: allocation.world,
+    ...(realMode ? { usedRealIds: [...usedRealIds] } : {}),
   };
 }
 export function createUniverseResolver(baseData) {
@@ -394,7 +608,25 @@ export function createUniverseResolver(baseData) {
   return function resolve(spec) {
     if (spec.baseVersion !== baseData.catalog.version)
       throw Error('This universe uses a different source library. Your save has been retained.');
-    const prefix = spec.id + ':' + spec.seed + ':' + (spec.legacyWorld ?? 'fresh') + ':';
+    if (spec.identityMode && !['real', 'fictional'].includes(spec.identityMode))
+      throw Error('Unknown universe identity mode.');
+    if (
+      spec.identityMode === 'real' &&
+      (spec.realVersion !== baseData.realPlayers?.version || spec.legacyWorld !== undefined)
+    )
+      throw Error(
+        'This real-player universe needs its original career library. Your save has been retained.',
+      );
+    const prefix =
+      spec.id +
+      ':' +
+      spec.seed +
+      ':' +
+      (spec.legacyWorld ?? 'fresh') +
+      ':' +
+      (spec.identityMode === 'real'
+        ? 'r1:' + spec.realVersion + ':' + (spec.outcomeSeed ?? 'default') + ':'
+        : '');
     const key = prefix + spec.season;
     if (cache.has(key)) return cache.get(key);
     let current,
@@ -408,7 +640,9 @@ export function createUniverseResolver(baseData) {
     if (!current) {
       current =
         spec.legacyWorld === undefined
-          ? initialUniverse({ ...spec, season: 1 }, baseData)
+          ? spec.identityMode === 'real'
+            ? realInitialUniverse({ ...spec, season: 1 }, baseData)
+            : initialUniverse({ ...spec, season: 1 }, baseData)
           : {
               catalog: {
                 ...baseData.catalog,

@@ -102,6 +102,7 @@ const { chromium } = require('playwright');
     await page.waitForSelector('[data-advance]');
     await wait();
     assert.equal((await state()).picks.length, 168);
+    assert.equal((await state()).universe.identityMode, 'real');
     // Real UI reserve -> free pickup into the open slot, then activate on recovery.
     let firstState = await state();
     const injured = firstState.teams[firstState.human].roster.find(
@@ -234,6 +235,7 @@ const { chromium } = require('playwright');
       ).json();
     });
     assert.equal(next.state.seasonYear, completed.seasonYear + 1);
+    assert.ok(next.catalog.players.some((p) => p.realPlayerId));
     assert.equal(next.state.universe.id, completed.universe.id);
     assert.ok(next.catalog.players.some((p) => backup.league.picks.some((x) => x.player === p.id)));
     const retained = next.catalog.players.find(
@@ -285,6 +287,7 @@ const { chromium } = require('playwright');
           crossBrowserBackupRestore: true,
           injuryReserveUI: Boolean(injured),
           cityDepthCharts: true,
+          realPlayerIdentities: true,
           weeklyAndYearlyRecaps: true,
           continuationRetainsHistory: true,
           newUniverseRegeneratesPlayers: true,

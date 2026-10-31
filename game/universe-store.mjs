@@ -1,6 +1,6 @@
 import { createUniverseResolver } from './universe.mjs';
 import { createLeague, botsUntilHuman, GameError } from './engine.mjs';
-import { NFL_CLUBS, ROSTER_SIZE } from './config.mjs';
+import { NFL_CLUBS, ROSTER_SIZE, hashText } from './config.mjs';
 
 export function universeServices(data) {
   const resolve = createUniverseResolver(data);
@@ -27,7 +27,11 @@ export function universeServices(data) {
       !Number.isInteger(spec.season) ||
       spec.season < 1 ||
       spec.season > 100 ||
-      (spec.legacyWorld !== undefined && !data.privateData.worlds[spec.legacyWorld])
+      (spec.legacyWorld !== undefined && !data.privateData.worlds[spec.legacyWorld]) ||
+      (spec.outcomeSeed !== undefined &&
+        (!Number.isInteger(spec.outcomeSeed) ||
+          spec.outcomeSeed < 0 ||
+          spec.outcomeSeed > 0xffffffff))
     )
       throw new GameError('This universe recovery recipe is invalid.');
     let value;
@@ -61,7 +65,16 @@ export function universeServices(data) {
               season: 2,
               legacyWorld: source.state.world,
             };
-      } else spec = { id, seed, season: 1, baseVersion: data.catalog.version };
+      } else
+        spec = {
+          id,
+          seed,
+          season: 1,
+          baseVersion: data.catalog.version,
+          identityMode: 'real',
+          realVersion: data.realPlayers.version,
+          outcomeSeed: hashText(id + ':outcomes:' + seed),
+        };
       const value = context({ universe: spec });
       const state = createLeague({
         name: options.name ?? 'Your Franchise',
@@ -79,6 +92,7 @@ export function universeServices(data) {
           season: spec.season,
           year: value.catalog.seasonYear,
           label: 'Universe ' + spec.id.slice(0, 6).toUpperCase(),
+          identityMode: spec.identityMode ?? 'fictional',
         },
         franchises: mode === 'continue' ? source.state.teams : null,
       });

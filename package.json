@@ -16,7 +16,9 @@
     "publish:pages": "node game/publish-pages.mjs",
     "build:pages": "node game/prepare-pages.mjs",
     "validate:universes": "node game/tests/universe-audit.mjs",
-    "validate:market": "node game/tests/market-parity.mjs"
+    "validate:market": "node game/tests/market-parity.mjs",
+    "data:real-players": ".venv/bin/python -m ffsim.export_real_players",
+    "validate:real-players": "node game/tests/real-player-audit.mjs"
   },
   "engines": {
     "node": ">=22"

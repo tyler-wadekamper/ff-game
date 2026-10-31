@@ -283,7 +283,7 @@ export function statTone(row, key, position, catalog, state) {
           Math.min(state.week - 1, 18) -
             (state.week - 1 >= catalog.players.find((p) => p.id === row.id)?.bye ? 1 : 0),
         )
-      : 17;
+      : (row.scheduled_games ?? 17);
     return row.games / possible >= 0.8 ? 'good' : row.games / possible >= 0.45 ? 'mid' : 'low';
   }
   const thresholds = {

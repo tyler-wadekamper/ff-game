@@ -1,0 +1,2094 @@
+{
+  "passed": true,
+  "scenarios": 50,
+  "historyAndAdpIdentical": true,
+  "identityLibraryVersion": "f3f13157b7c9fdef",
+  "sourcePeople": 2752,
+  "ageRangeExample": {
+    "name": "Lamar Jackson",
+    "min": 22,
+    "max": 29,
+    "distinct": 7
+  },
+  "generatorFingerprint": "8f842c38dfb58adb913838119484eb1fc18ee63ce001dbd2640331a8809502f0",
+  "summary": [
+    {
+      "name": "Lamar Jackson",
+      "age": 28,
+      "min": 22.32,
+      "p10": 133.052,
+      "median": 307.28,
+      "mean": 281.23800000000006,
+      "p90": 420.824,
+      "max": 441.62,
+      "sd": 104.80919198238291,
+      "distinctSeasons": 49,
+      "meanRushingYards": 450.7
+    },
+    {
+      "name": "Patrick Mahomes",
+      "age": 30,
+      "min": 20.26,
+      "p10": 25.668,
+      "median": 223.72,
+      "mean": 201.1508,
+      "p90": 346.572,
+      "max": 419.54,
+      "sd": 107.45254366165558,
+      "distinctSeasons": 50,
+      "meanRushingYards": 171.26
+    },
+    {
+      "name": "Christian McCaffrey",
+      "age": 28,
+      "min": 44.1,
+      "p10": 46.4,
+      "median": 190.8,
+      "mean": 157.84199999999998,
+      "p90": 229.11,
+      "max": 242.8,
+      "sd": 76.72126456204956,
+      "distinctSeasons": 48,
+      "meanRushingYards": 573.94
+    },
+    {
+      "name": "Justin Jefferson",
+      "age": 28,
+      "min": 62.1,
+      "p10": 133.84,
+      "median": 219.3,
+      "mean": 217.50079999999997,
+      "p90": 321.05600000000004,
+      "max": 336.32,
+      "sd": 67.66128026692961,
+      "distinctSeasons": 50,
+      "meanRushingYards": 6.78
+    },
+    {
+      "name": "Travis Kelce",
+      "age": 29,
+      "min": 77.9,
+      "p10": 82.94,
+      "median": 193.95,
+      "mean": 173.95799999999997,
+      "p90": 254.10000000000002,
+      "max": 283.5,
+      "sd": 66.62546687266062,
+      "distinctSeasons": 49,
+      "meanRushingYards": 2.04
+    }
+  ],
+  "samples": {
+    "Lamar Jackson": [
+      {
+        "age": 28,
+        "ppr": 134.22,
+        "games": 10,
+        "rushingYards": 85,
+        "receivingYards": 0,
+        "passingYards": 2043
+      },
+      {
+        "age": 28,
+        "ppr": 352.88,
+        "games": 17,
+        "rushingYards": 262,
+        "receivingYards": 0,
+        "passingYards": 4717
+      },
+      {
+        "age": 28,
+        "ppr": 135.68,
+        "games": 10,
+        "rushingYards": 86,
+        "receivingYards": 0,
+        "passingYards": 2077
+      },
+      {
+        "age": 28,
+        "ppr": 440.64,
+        "games": 17,
+        "rushingYards": 956,
+        "receivingYards": 0,
+        "passingYards": 4376
+      },
+      {
+        "age": 28,
+        "ppr": 308.52,
+        "games": 15,
+        "rushingYards": 610,
+        "receivingYards": 0,
+        "passingYards": 2788
+      },
+      {
+        "age": 28,
+        "ppr": 148.32,
+        "games": 10,
+        "rushingYards": 92,
+        "receivingYards": 0,
+        "passingYards": 2328
+      },
+      {
+        "age": 28,
+        "ppr": 423.74,
+        "games": 17,
+        "rushingYards": 361,
+        "receivingYards": 6,
+        "passingYards": 5451
+      },
+      {
+        "age": 28,
+        "ppr": 256.72,
+        "games": 17,
+        "rushingYards": 138,
+        "receivingYards": -12,
+        "passingYards": 4403
+      },
+      {
+        "age": 28,
+        "ppr": 336.62,
+        "games": 17,
+        "rushingYards": 245,
+        "receivingYards": 0,
+        "passingYards": 4353
+      },
+      {
+        "age": 28,
+        "ppr": 356.02,
+        "games": 16,
+        "rushingYards": 265,
+        "receivingYards": 0,
+        "passingYards": 4738
+      },
+      {
+        "age": 28,
+        "ppr": 321.94,
+        "games": 15,
+        "rushingYards": 661,
+        "receivingYards": 0,
+        "passingYards": 2946
+      },
+      {
+        "age": 28,
+        "ppr": 233.4,
+        "games": 12,
+        "rushingYards": 766,
+        "receivingYards": 0,
+        "passingYards": 2770
+      },
+      {
+        "age": 28,
+        "ppr": 22.32,
+        "games": 5,
+        "rushingYards": 38,
+        "receivingYards": 0,
+        "passingYards": 463
+      },
+      {
+        "age": 28,
+        "ppr": 116.26,
+        "games": 8,
+        "rushingYards": 49,
+        "receivingYards": 0,
+        "passingYards": 1984
+      },
+      {
+        "age": 28,
+        "ppr": 322.96,
+        "games": 15,
+        "rushingYards": 662,
+        "receivingYards": 0,
+        "passingYards": 3019
+      },
+      {
+        "age": 28,
+        "ppr": 434.18,
+        "games": 17,
+        "rushingYards": 927,
+        "receivingYards": 0,
+        "passingYards": 4187
+      },
+      {
+        "age": 28,
+        "ppr": 335.06,
+        "games": 17,
+        "rushingYards": 541,
+        "receivingYards": 0,
+        "passingYards": 3624
+      },
+      {
+        "age": 28,
+        "ppr": 349.2,
+        "games": 17,
+        "rushingYards": 580,
+        "receivingYards": 0,
+        "passingYards": 3880
+      },
+      {
+        "age": 28,
+        "ppr": 330.32,
+        "games": 15,
+        "rushingYards": 692,
+        "receivingYards": 0,
+        "passingYards": 3078
+      },
+      {
+        "age": 28,
+        "ppr": 420.5,
+        "games": 17,
+        "rushingYards": 355,
+        "receivingYards": 6,
+        "passingYards": 5385
+      },
+      {
+        "age": 28,
+        "ppr": 249.76,
+        "games": 12,
+        "rushingYards": 832,
+        "receivingYards": 0,
+        "passingYards": 3014
+      },
+      {
+        "age": 28,
+        "ppr": 441.62,
+        "games": 17,
+        "rushingYards": 959,
+        "receivingYards": 0,
+        "passingYards": 4393
+      },
+      {
+        "age": 28,
+        "ppr": 245.32,
+        "games": 12,
+        "rushingYards": 786,
+        "receivingYards": 0,
+        "passingYards": 3018
+      },
+      {
+        "age": 28,
+        "ppr": 336.42,
+        "games": 17,
+        "rushingYards": 543,
+        "receivingYards": 0,
+        "passingYards": 3653
+      },
+      {
+        "age": 28,
+        "ppr": 395.6,
+        "games": 17,
+        "rushingYards": 320,
+        "receivingYards": 6,
+        "passingYards": 4850
+      },
+      {
+        "age": 28,
+        "ppr": 328.44,
+        "games": 15,
+        "rushingYards": 684,
+        "receivingYards": 0,
+        "passingYards": 3051
+      },
+      {
+        "age": 28,
+        "ppr": 115.3,
+        "games": 7,
+        "rushingYards": 283,
+        "receivingYards": 0,
+        "passingYards": 1325
+      },
+      {
+        "age": 28,
+        "ppr": 431.56,
+        "games": 17,
+        "rushingYards": 916,
+        "receivingYards": 0,
+        "passingYards": 4149
+      },
+      {
+        "age": 28,
+        "ppr": 196.9,
+        "games": 12,
+        "rushingYards": 173,
+        "receivingYards": 0,
+        "passingYards": 2790
+      },
+      {
+        "age": 28,
+        "ppr": 298.44,
+        "games": 16,
+        "rushingYards": 446,
+        "receivingYards": 0,
+        "passingYards": 3196
+      },
+      {
+        "age": 28,
+        "ppr": 145.8,
+        "games": 8,
+        "rushingYards": 246,
+        "receivingYards": 0,
+        "passingYards": 1730
+      },
+      {
+        "age": 28,
+        "ppr": 276.3,
+        "games": 17,
+        "rushingYards": 149,
+        "receivingYards": -12,
+        "passingYards": 4865
+      },
+      {
+        "age": 28,
+        "ppr": 122.54,
+        "games": 8,
+        "rushingYards": 53,
+        "receivingYards": 0,
+        "passingYards": 2131
+      },
+      {
+        "age": 28,
+        "ppr": 406.24,
+        "games": 17,
+        "rushingYards": 338,
+        "receivingYards": 6,
+        "passingYards": 5071
+      },
+      {
+        "age": 28,
+        "ppr": 141.64,
+        "games": 10,
+        "rushingYards": 90,
+        "receivingYards": 0,
+        "passingYards": 2216
+      },
+      {
+        "age": 28,
+        "ppr": 319.86,
+        "games": 15,
+        "rushingYards": 671,
+        "receivingYards": 0,
+        "passingYards": 3119
+      },
+      {
+        "age": 28,
+        "ppr": 135.68,
+        "games": 10,
+        "rushingYards": 86,
+        "receivingYards": 0,
+        "passingYards": 2077
+      },
+      {
+        "age": 28,
+        "ppr": 104.96,
+        "games": 7,
+        "rushingYards": 246,
+        "receivingYards": 0,
+        "passingYards": 1159
+      },
+      {
+        "age": 28,
+        "ppr": 239.3,
+        "games": 12,
+        "rushingYards": 789,
+        "receivingYards": 0,
+        "passingYards": 2860
+      },
+      {
+        "age": 28,
+        "ppr": 261,
+        "games": 12,
+        "rushingYards": 878,
+        "receivingYards": 0,
+        "passingYards": 3180
+      },
+      {
+        "age": 28,
+        "ppr": 306.04,
+        "games": 15,
+        "rushingYards": 602,
+        "receivingYards": 0,
+        "passingYards": 2746
+      },
+      {
+        "age": 28,
+        "ppr": 241.02,
+        "games": 12,
+        "rushingYards": 797,
+        "receivingYards": 0,
+        "passingYards": 2883
+      },
+      {
+        "age": 28,
+        "ppr": 350.78,
+        "games": 17,
+        "rushingYards": 259,
+        "receivingYards": 0,
+        "passingYards": 4672
+      },
+      {
+        "age": 28,
+        "ppr": 292.92,
+        "games": 15,
+        "rushingYards": 576,
+        "receivingYards": 0,
+        "passingYards": 2683
+      },
+      {
+        "age": 28,
+        "ppr": 355.84,
+        "games": 17,
+        "rushingYards": 594,
+        "receivingYards": 0,
+        "passingYards": 4011
+      },
+      {
+        "age": 28,
+        "ppr": 341.6,
+        "games": 17,
+        "rushingYards": 558,
+        "receivingYards": 0,
+        "passingYards": 3745
+      },
+      {
+        "age": 28,
+        "ppr": 319.12,
+        "games": 15,
+        "rushingYards": 648,
+        "receivingYards": 0,
+        "passingYards": 2958
+      },
+      {
+        "age": 28,
+        "ppr": 404.26,
+        "games": 17,
+        "rushingYards": 335,
+        "receivingYards": 6,
+        "passingYards": 5029
+      },
+      {
+        "age": 28,
+        "ppr": 250.28,
+        "games": 17,
+        "rushingYards": 136,
+        "receivingYards": -12,
+        "passingYards": 4347
+      },
+      {
+        "age": 28,
+        "ppr": 227.86,
+        "games": 14,
+        "rushingYards": 171,
+        "receivingYards": 0,
+        "passingYards": 3019
+      }
+    ],
+    "Patrick Mahomes": [
+      {
+        "age": 30,
+        "ppr": 231.2,
+        "games": 13,
+        "rushingYards": 236,
+        "receivingYards": 8,
+        "passingYards": 3045
+      },
+      {
+        "age": 30,
+        "ppr": 234.56,
+        "games": 13,
+        "rushingYards": 240,
+        "receivingYards": 8,
+        "passingYards": 3119
+      },
+      {
+        "age": 30,
+        "ppr": 361.6,
+        "games": 17,
+        "rushingYards": 274,
+        "receivingYards": 0,
+        "passingYards": 4905
+      },
+      {
+        "age": 30,
+        "ppr": 20.26,
+        "games": 5,
+        "rushingYards": 35,
+        "receivingYards": 0,
+        "passingYards": 419
+      },
+      {
+        "age": 30,
+        "ppr": 25.56,
+        "games": 5,
+        "rushingYards": 52,
+        "receivingYards": 0,
+        "passingYards": 559
+      },
+      {
+        "age": 30,
+        "ppr": 232.1,
+        "games": 13,
+        "rushingYards": 209,
+        "receivingYards": 12,
+        "passingYards": 3025
+      },
+      {
+        "age": 30,
+        "ppr": 111.92,
+        "games": 9,
+        "rushingYards": 86,
+        "receivingYards": 0,
+        "passingYards": 1733
+      },
+      {
+        "age": 30,
+        "ppr": 226.7,
+        "games": 17,
+        "rushingYards": 79,
+        "receivingYards": 0,
+        "passingYards": 3420
+      },
+      {
+        "age": 30,
+        "ppr": 147.56,
+        "games": 8,
+        "rushingYards": 26,
+        "receivingYards": 0,
+        "passingYards": 2374
+      },
+      {
+        "age": 30,
+        "ppr": 114.08,
+        "games": 8,
+        "rushingYards": 88,
+        "receivingYards": 0,
+        "passingYards": 1782
+      },
+      {
+        "age": 30,
+        "ppr": 21.74,
+        "games": 5,
+        "rushingYards": 35,
+        "receivingYards": 0,
+        "passingYards": 456
+      },
+      {
+        "age": 30,
+        "ppr": 337.86,
+        "games": 16,
+        "rushingYards": 100,
+        "receivingYards": -3,
+        "passingYards": 3979
+      },
+      {
+        "age": 30,
+        "ppr": 123.12,
+        "games": 8,
+        "rushingYards": 52,
+        "receivingYards": 0,
+        "passingYards": 2148
+      },
+      {
+        "age": 30,
+        "ppr": 293.14,
+        "games": 16,
+        "rushingYards": 321,
+        "receivingYards": 2,
+        "passingYards": 3946
+      },
+      {
+        "age": 30,
+        "ppr": 23.46,
+        "games": 5,
+        "rushingYards": 49,
+        "receivingYards": 0,
+        "passingYards": 514
+      },
+      {
+        "age": 30,
+        "ppr": 25.68,
+        "games": 5,
+        "rushingYards": 52,
+        "receivingYards": 0,
+        "passingYards": 562
+      },
+      {
+        "age": 30,
+        "ppr": 238.56,
+        "games": 13,
+        "rushingYards": 216,
+        "receivingYards": 12,
+        "passingYards": 3169
+      },
+      {
+        "age": 30,
+        "ppr": 228.06,
+        "games": 13,
+        "rushingYards": 204,
+        "receivingYards": 11,
+        "passingYards": 2939
+      },
+      {
+        "age": 30,
+        "ppr": 112.66,
+        "games": 8,
+        "rushingYards": 47,
+        "receivingYards": 0,
+        "passingYards": 1899
+      },
+      {
+        "age": 30,
+        "ppr": 116.08,
+        "games": 9,
+        "rushingYards": 90,
+        "receivingYards": 0,
+        "passingYards": 1827
+      },
+      {
+        "age": 30,
+        "ppr": 356.4,
+        "games": 16,
+        "rushingYards": 109,
+        "receivingYards": -3,
+        "passingYards": 4420
+      },
+      {
+        "age": 30,
+        "ppr": 116.2,
+        "games": 8,
+        "rushingYards": 48,
+        "receivingYards": 0,
+        "passingYards": 1985
+      },
+      {
+        "age": 30,
+        "ppr": 382.64,
+        "games": 17,
+        "rushingYards": 368,
+        "receivingYards": 0,
+        "passingYards": 5046
+      },
+      {
+        "age": 30,
+        "ppr": 151.22,
+        "games": 10,
+        "rushingYards": 95,
+        "receivingYards": 0,
+        "passingYards": 2393
+      },
+      {
+        "age": 30,
+        "ppr": 120.92,
+        "games": 9,
+        "rushingYards": 94,
+        "receivingYards": 0,
+        "passingYards": 1938
+      },
+      {
+        "age": 30,
+        "ppr": 280.64,
+        "games": 16,
+        "rushingYards": 302,
+        "receivingYards": 2,
+        "passingYards": 3681
+      },
+      {
+        "age": 30,
+        "ppr": 144.2,
+        "games": 8,
+        "rushingYards": 38,
+        "receivingYards": 0,
+        "passingYards": 1910
+      },
+      {
+        "age": 30,
+        "ppr": 305.16,
+        "games": 17,
+        "rushingYards": 51,
+        "receivingYards": 7,
+        "passingYards": 4309
+      },
+      {
+        "age": 30,
+        "ppr": 230.08,
+        "games": 17,
+        "rushingYards": 82,
+        "receivingYards": 0,
+        "passingYards": 3497
+      },
+      {
+        "age": 30,
+        "ppr": 105.46,
+        "games": 7,
+        "rushingYards": 249,
+        "receivingYards": 0,
+        "passingYards": 1164
+      },
+      {
+        "age": 30,
+        "ppr": 220.84,
+        "games": 13,
+        "rushingYards": 219,
+        "receivingYards": 9,
+        "passingYards": 2826
+      },
+      {
+        "age": 30,
+        "ppr": 201.7,
+        "games": 12,
+        "rushingYards": 177,
+        "receivingYards": 0,
+        "passingYards": 2900
+      },
+      {
+        "age": 30,
+        "ppr": 307.84,
+        "games": 15,
+        "rushingYards": 612,
+        "receivingYards": 0,
+        "passingYards": 2716
+      },
+      {
+        "age": 30,
+        "ppr": 118.18,
+        "games": 9,
+        "rushingYards": 93,
+        "receivingYards": 0,
+        "passingYards": 1872
+      },
+      {
+        "age": 30,
+        "ppr": 220.56,
+        "games": 13,
+        "rushingYards": 219,
+        "receivingYards": 7,
+        "passingYards": 2824
+      },
+      {
+        "age": 30,
+        "ppr": 112.84,
+        "games": 8,
+        "rushingYards": 46,
+        "receivingYards": 0,
+        "passingYards": 1906
+      },
+      {
+        "age": 30,
+        "ppr": 135.28,
+        "games": 8,
+        "rushingYards": 24,
+        "receivingYards": 0,
+        "passingYards": 2072
+      },
+      {
+        "age": 30,
+        "ppr": 144.52,
+        "games": 8,
+        "rushingYards": 38,
+        "receivingYards": 0,
+        "passingYards": 1918
+      },
+      {
+        "age": 30,
+        "ppr": 372.76,
+        "games": 17,
+        "rushingYards": 388,
+        "receivingYards": 0,
+        "passingYards": 5049
+      },
+      {
+        "age": 30,
+        "ppr": 282.16,
+        "games": 17,
+        "rushingYards": 270,
+        "receivingYards": 0,
+        "passingYards": 4079
+      },
+      {
+        "age": 30,
+        "ppr": 328.8,
+        "games": 17,
+        "rushingYards": 53,
+        "receivingYards": 7,
+        "passingYards": 4895
+      },
+      {
+        "age": 30,
+        "ppr": 345.48,
+        "games": 17,
+        "rushingYards": 346,
+        "receivingYards": 0,
+        "passingYards": 4472
+      },
+      {
+        "age": 30,
+        "ppr": 226.6,
+        "games": 13,
+        "rushingYards": 228,
+        "receivingYards": 8,
+        "passingYards": 2950
+      },
+      {
+        "age": 30,
+        "ppr": 22.24,
+        "games": 5,
+        "rushingYards": 38,
+        "receivingYards": 0,
+        "passingYards": 461
+      },
+      {
+        "age": 30,
+        "ppr": 243.74,
+        "games": 13,
+        "rushingYards": 224,
+        "receivingYards": 13,
+        "passingYards": 3276
+      },
+      {
+        "age": 30,
+        "ppr": 241.54,
+        "games": 13,
+        "rushingYards": 221,
+        "receivingYards": 12,
+        "passingYards": 3231
+      },
+      {
+        "age": 30,
+        "ppr": 419.54,
+        "games": 17,
+        "rushingYards": 875,
+        "receivingYards": 0,
+        "passingYards": 3951
+      },
+      {
+        "age": 30,
+        "ppr": 121.84,
+        "games": 8,
+        "rushingYards": 96,
+        "receivingYards": 0,
+        "passingYards": 1956
+      },
+      {
+        "age": 30,
+        "ppr": 234.3,
+        "games": 17,
+        "rushingYards": 83,
+        "receivingYards": 0,
+        "passingYards": 3600
+      },
+      {
+        "age": 30,
+        "ppr": 337.96,
+        "games": 17,
+        "rushingYards": 386,
+        "receivingYards": 0,
+        "passingYards": 4484
+      }
+    ],
+    "Christian McCaffrey": [
+      {
+        "age": 28,
+        "ppr": 177.2,
+        "games": 14,
+        "rushingYards": 602,
+        "receivingYards": 390,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 191.5,
+        "games": 14,
+        "rushingYards": 688,
+        "receivingYards": 447,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 181.7,
+        "games": 14,
+        "rushingYards": 629,
+        "receivingYards": 408,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 51.6,
+        "games": 4,
+        "rushingYards": 215,
+        "receivingYards": 161,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 46.4,
+        "games": 4,
+        "rushingYards": 190,
+        "receivingYards": 144,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 194.4,
+        "games": 14,
+        "rushingYards": 677,
+        "receivingYards": 467,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 214.4,
+        "games": 16,
+        "rushingYards": 638,
+        "receivingYards": 486,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 206.1,
+        "games": 16,
+        "rushingYards": 587,
+        "receivingYards": 494,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 184.6,
+        "games": 14,
+        "rushingYards": 647,
+        "receivingYards": 419,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 209.6,
+        "games": 16,
+        "rushingYards": 609,
+        "receivingYards": 467,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 45.2,
+        "games": 4,
+        "rushingYards": 196,
+        "receivingYards": 136,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 237.8,
+        "games": 13,
+        "rushingYards": 957,
+        "receivingYards": 431,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 48.7,
+        "games": 4,
+        "rushingYards": 199,
+        "receivingYards": 148,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 44.9,
+        "games": 4,
+        "rushingYards": 194,
+        "receivingYards": 135,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 53.6,
+        "games": 4,
+        "rushingYards": 220,
+        "receivingYards": 166,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 46.4,
+        "games": 4,
+        "rushingYards": 190,
+        "receivingYards": 144,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 203.2,
+        "games": 14,
+        "rushingYards": 706,
+        "receivingYards": 486,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 200.9,
+        "games": 14,
+        "rushingYards": 697,
+        "receivingYards": 482,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 46.9,
+        "games": 4,
+        "rushingYards": 206,
+        "receivingYards": 143,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 218.8,
+        "games": 16,
+        "rushingYards": 657,
+        "receivingYards": 501,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 225.8,
+        "games": 13,
+        "rushingYards": 874,
+        "receivingYards": 394,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 49.8,
+        "games": 4,
+        "rushingYards": 205,
+        "receivingYards": 153,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 233.5,
+        "games": 13,
+        "rushingYards": 938,
+        "receivingYards": 417,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 183.3,
+        "games": 14,
+        "rushingYards": 616,
+        "receivingYards": 427,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 215.7,
+        "games": 16,
+        "rushingYards": 645,
+        "receivingYards": 492,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 44.1,
+        "games": 4,
+        "rushingYards": 189,
+        "receivingYards": 132,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 222,
+        "games": 16,
+        "rushingYards": 1078,
+        "receivingYards": 262,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 53.1,
+        "games": 4,
+        "rushingYards": 218,
+        "receivingYards": 163,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 227.6,
+        "games": 16,
+        "rushingYards": 677,
+        "receivingYards": 569,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 228.7,
+        "games": 16,
+        "rushingYards": 1132,
+        "receivingYards": 275,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 176.5,
+        "games": 14,
+        "rushingYards": 615,
+        "receivingYards": 420,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 224.4,
+        "games": 16,
+        "rushingYards": 670,
+        "receivingYards": 564,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 44.9,
+        "games": 4,
+        "rushingYards": 194,
+        "receivingYards": 135,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 226.3,
+        "games": 16,
+        "rushingYards": 677,
+        "receivingYards": 516,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 192.9,
+        "games": 14,
+        "rushingYards": 698,
+        "receivingYards": 451,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 52.2,
+        "games": 4,
+        "rushingYards": 218,
+        "receivingYards": 164,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 188.1,
+        "games": 14,
+        "rushingYards": 669,
+        "receivingYards": 432,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 221.8,
+        "games": 16,
+        "rushingYards": 1077,
+        "receivingYards": 261,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 242.8,
+        "games": 13,
+        "rushingYards": 983,
+        "receivingYards": 445,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 232.8,
+        "games": 13,
+        "rushingYards": 922,
+        "receivingYards": 416,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 46.7,
+        "games": 4,
+        "rushingYards": 192,
+        "receivingYards": 145,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 238.9,
+        "games": 13,
+        "rushingYards": 965,
+        "receivingYards": 434,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 185.2,
+        "games": 14,
+        "rushingYards": 651,
+        "receivingYards": 421,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 52.6,
+        "games": 4,
+        "rushingYards": 221,
+        "receivingYards": 165,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 187,
+        "games": 14,
+        "rushingYards": 633,
+        "receivingYards": 437,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 190.1,
+        "games": 14,
+        "rushingYards": 652,
+        "receivingYards": 449,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 49.9,
+        "games": 4,
+        "rushingYards": 204,
+        "receivingYards": 155,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 212.8,
+        "games": 16,
+        "rushingYards": 628,
+        "receivingYards": 480,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 214.7,
+        "games": 16,
+        "rushingYards": 617,
+        "receivingYards": 520,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 224,
+        "games": 13,
+        "rushingYards": 935,
+        "receivingYards": 385,
+        "passingYards": 0
+      }
+    ],
+    "Justin Jefferson": [
+      {
+        "age": 28,
+        "ppr": 236.3,
+        "games": 16,
+        "rushingYards": 0,
+        "receivingYards": 1153,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 130.6,
+        "games": 14,
+        "rushingYards": 22,
+        "receivingYards": 544,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 194.8,
+        "games": 14,
+        "rushingYards": 15,
+        "receivingYards": 983,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 63.3,
+        "games": 7,
+        "rushingYards": 0,
+        "receivingYards": 393,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 189,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 970,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 195.7,
+        "games": 17,
+        "rushingYards": 0,
+        "receivingYards": 977,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 146.7,
+        "games": 13,
+        "rushingYards": 6,
+        "receivingYards": 751,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 326.7,
+        "games": 16,
+        "rushingYards": -4,
+        "receivingYards": 1471,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 238.8,
+        "games": 16,
+        "rushingYards": 0,
+        "receivingYards": 1178,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 336.1,
+        "games": 16,
+        "rushingYards": -2,
+        "receivingYards": 1513,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 166.1,
+        "games": 16,
+        "rushingYards": 0,
+        "receivingYards": 801,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 200.7,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 867,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 336.32,
+        "games": 17,
+        "rushingYards": 2,
+        "receivingYards": 1642,
+        "passingYards": 23
+      },
+      {
+        "age": 28,
+        "ppr": 170.8,
+        "games": 16,
+        "rushingYards": 0,
+        "receivingYards": 848,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 62.1,
+        "games": 7,
+        "rushingYards": 0,
+        "receivingYards": 371,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 198.3,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 1053,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 261.3,
+        "games": 16,
+        "rushingYards": 0,
+        "receivingYards": 1373,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 261.5,
+        "games": 16,
+        "rushingYards": 0,
+        "receivingYards": 1375,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 322.1,
+        "games": 17,
+        "rushingYards": 3,
+        "receivingYards": 1462,
+        "passingYards": 15
+      },
+      {
+        "age": 28,
+        "ppr": 320.9,
+        "games": 16,
+        "rushingYards": -2,
+        "receivingYards": 1411,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 193.6,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 806,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 320.94,
+        "games": 17,
+        "rushingYards": 2,
+        "receivingYards": 1499,
+        "passingYards": 21
+      },
+      {
+        "age": 28,
+        "ppr": 276.1,
+        "games": 16,
+        "rushingYards": 44,
+        "receivingYards": 1197,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 134.2,
+        "games": 12,
+        "rushingYards": 0,
+        "receivingYards": 642,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 232.1,
+        "games": 17,
+        "rushingYards": 39,
+        "receivingYards": 1262,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 188.7,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 1007,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 168.6,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 656,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 187.3,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 953,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 215.9,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 1109,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 219.1,
+        "games": 14,
+        "rushingYards": 0,
+        "receivingYards": 751,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 232.4,
+        "games": 17,
+        "rushingYards": 7,
+        "receivingYards": 1147,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 252.3,
+        "games": 17,
+        "rushingYards": 0,
+        "receivingYards": 1223,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 205.3,
+        "games": 12,
+        "rushingYards": 0,
+        "receivingYards": 1033,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 195.6,
+        "games": 17,
+        "rushingYards": 47,
+        "receivingYards": 849,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 243.4,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 1354,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 333.58,
+        "games": 17,
+        "rushingYards": 2,
+        "receivingYards": 1615,
+        "passingYards": 22
+      },
+      {
+        "age": 28,
+        "ppr": 273.4,
+        "games": 17,
+        "rushingYards": 0,
+        "receivingYards": 1244,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 161.8,
+        "games": 16,
+        "rushingYards": 10,
+        "receivingYards": 768,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 219.5,
+        "games": 16,
+        "rushingYards": 20,
+        "receivingYards": 955,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 222,
+        "games": 16,
+        "rushingYards": 20,
+        "receivingYards": 980,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 218.6,
+        "games": 12,
+        "rushingYards": 0,
+        "receivingYards": 1096,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 244,
+        "games": 16,
+        "rushingYards": 8,
+        "receivingYards": 992,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 246.5,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 1385,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 247.8,
+        "games": 17,
+        "rushingYards": 71,
+        "receivingYards": 1027,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 279.9,
+        "games": 16,
+        "rushingYards": 0,
+        "receivingYards": 1519,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 64.8,
+        "games": 14,
+        "rushingYards": 0,
+        "receivingYards": 348,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 121.2,
+        "games": 14,
+        "rushingYards": 0,
+        "receivingYards": 542,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 139.5,
+        "games": 13,
+        "rushingYards": 6,
+        "receivingYards": 689,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 251.4,
+        "games": 17,
+        "rushingYards": 0,
+        "receivingYards": 1214,
+        "passingYards": 0
+      },
+      {
+        "age": 28,
+        "ppr": 227.4,
+        "games": 16,
+        "rushingYards": 23,
+        "receivingYards": 991,
+        "passingYards": 0
+      }
+    ],
+    "Travis Kelce": [
+      {
+        "age": 29,
+        "ppr": 226.2,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 1032,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 225.7,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 1027,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 217.5,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 955,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 86.7,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 447,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 77.9,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 399,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 217.3,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 973,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 192,
+        "games": 15,
+        "rushingYards": 10,
+        "receivingYards": 830,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 195.1,
+        "games": 15,
+        "rushingYards": 6,
+        "receivingYards": 905,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 216.4,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 944,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 190.4,
+        "games": 15,
+        "rushingYards": 10,
+        "receivingYards": 814,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 83,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 420,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 273.1,
+        "games": 16,
+        "rushingYards": 4,
+        "receivingYards": 1167,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 88.9,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 469,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 81.9,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 409,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 82.2,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 432,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 82.4,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 434,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 218.6,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 986,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 210.1,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 901,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 86.8,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 458,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 199.2,
+        "games": 15,
+        "rushingYards": 11,
+        "receivingYards": 901,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 272.3,
+        "games": 16,
+        "rushingYards": 4,
+        "receivingYards": 1159,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 90,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 480,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 252.4,
+        "games": 16,
+        "rushingYards": 3,
+        "receivingYards": 1061,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 217.7,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 977,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 189.3,
+        "games": 15,
+        "rushingYards": 10,
+        "receivingYards": 803,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 90.5,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 475,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 157.8,
+        "games": 11,
+        "rushingYards": -3,
+        "receivingYards": 621,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 81.9,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 429,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 185.3,
+        "games": 15,
+        "rushingYards": 6,
+        "receivingYards": 807,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 162.1,
+        "games": 11,
+        "rushingYards": -3,
+        "receivingYards": 634,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 208.1,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 891,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 196.5,
+        "games": 15,
+        "rushingYards": 6,
+        "receivingYards": 919,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 85.3,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 443,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 194.4,
+        "games": 15,
+        "rushingYards": 10,
+        "receivingYards": 854,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 233.4,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 1054,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 89.4,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 474,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 229.2,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 1042,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 153.2,
+        "games": 11,
+        "rushingYards": -3,
+        "receivingYards": 575,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 269.4,
+        "games": 16,
+        "rushingYards": 4,
+        "receivingYards": 1130,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 283.5,
+        "games": 16,
+        "rushingYards": 4,
+        "receivingYards": 1211,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 84.2,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 452,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 272,
+        "games": 16,
+        "rushingYards": 4,
+        "receivingYards": 1156,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 222,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 1000,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 88.7,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 467,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 216.8,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 968,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 210,
+        "games": 15,
+        "rushingYards": 0,
+        "receivingYards": 900,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 83.3,
+        "games": 10,
+        "rushingYards": 0,
+        "receivingYards": 443,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 193.5,
+        "games": 15,
+        "rushingYards": 10,
+        "receivingYards": 845,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 185.5,
+        "games": 15,
+        "rushingYards": 6,
+        "receivingYards": 809,
+        "passingYards": 0
+      },
+      {
+        "age": 29,
+        "ppr": 248.8,
+        "games": 16,
+        "rushingYards": 3,
+        "receivingYards": 1055,
+        "passingYards": 0
+      }
+    ]
+  },
+  "note": "Conditional game simulations from a finite empirical source library, not NFL forecasts or confidence intervals."
+}

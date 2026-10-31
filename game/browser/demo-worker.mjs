@@ -13,12 +13,13 @@ import { universeServices } from './universe-store.mjs';
 import { weeklyRecap } from './season-recaps.mjs';
 
 const ready = (async () => {
-  const [catalogResponse, worldsResponse, marketResponse] = await Promise.all([
+  const [catalogResponse, worldsResponse, marketResponse, realResponse] = await Promise.all([
     fetch(new URL('./catalog.json', import.meta.url)),
     fetch(new URL('./worlds.json.gz', import.meta.url)),
     fetch(new URL('./adp-model.json.gz', import.meta.url)),
+    fetch(new URL('./real-players.json.gz', import.meta.url)),
   ]);
-  if (!catalogResponse.ok || !worldsResponse.ok || !marketResponse.ok)
+  if (!catalogResponse.ok || !worldsResponse.ok || !marketResponse.ok || !realResponse.ok)
     throw Error('The game download failed. Reload to retry.');
   const catalog = await catalogResponse.json();
   const data = await new Response(
@@ -26,6 +27,9 @@ const ready = (async () => {
   ).json();
   const adpModel = await new Response(
     marketResponse.body.pipeThrough(new DecompressionStream('gzip')),
+  ).json();
+  const realPlayers = await new Response(
+    realResponse.body.pipeThrough(new DecompressionStream('gzip')),
   ).json();
   if (catalog.version !== data.version) throw Error('Game data changed. Reload to update.');
   const db = await new Promise((resolve, reject) => {
@@ -40,7 +44,7 @@ const ready = (async () => {
     data,
     db,
     players,
-    services: universeServices({ catalog, privateData: data, adpModel, players }),
+    services: universeServices({ catalog, privateData: data, adpModel, realPlayers, players }),
   };
 })();
 

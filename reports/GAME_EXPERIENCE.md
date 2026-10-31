@@ -1,5 +1,7 @@
 # Player careers, universes and the Sunday paper
 
+**Update:** New universes now use real NFL players with randomized ages. [Real-player methods and uncertainty evidence](REAL_PLAYER_UNIVERSES.md). Existing fictional saves keep their players.
+
 [Play the browser game](https://tyler-wadekamper.github.io/ff-game/index.html?v=3).
 
 Player cards now show season PPR finishes (WR1, QB23), current ranks through completed weeks, and separate passing, rushing and receiving tables. Competition ties share a finish; zero-opportunity seasons have none. The colored cells compare the same position and season, using a starter/depth reference group for statistics and minimum samples for efficiency rates. Completed finishes remain fixed when players retire in later years.

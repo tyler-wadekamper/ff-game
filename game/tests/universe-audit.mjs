@@ -60,6 +60,8 @@ const source = data.privateData.worlds.map((w) => metrics(data.catalog, w)),
 for (let seed = 1; seed <= 100; seed++) {
   const spec = {
     id: 'audit-' + seed,
+    identityMode: 'real',
+    realVersion: data.realPlayers.version,
     seed: 10000 + seed,
     season: 1,
     baseVersion: data.catalog.version,
@@ -108,6 +110,7 @@ const fingerprint = createHash('sha256')
   .digest('hex');
 const summary = {
   passed: checks.every(Boolean),
+  identityMode: 'real',
   freshUniverses: 100,
   continuedUniverses: 20,
   sourceWorlds: 12,

@@ -1,0 +1,22 @@
+[
+  {
+    "spec": {
+      "id": "saved-fictional-universe",
+      "seed": 4481,
+      "season": 1,
+      "baseVersion": "0fd42c9d1e96bc83"
+    },
+    "catalog": "41c828d78eb06334c10075009897b16ba23e8c6561b24fab312ef59488607dfb",
+    "world": "853491f7636bf6055d70fd285689f5b1c3afcff94544a12b3b8316774a2d5d8f"
+  },
+  {
+    "spec": {
+      "id": "saved-fictional-universe",
+      "seed": 4481,
+      "season": 2,
+      "baseVersion": "0fd42c9d1e96bc83"
+    },
+    "catalog": "d4f53793281590d6768d6e119149e644333809c22333e619196e123327d8b346",
+    "world": "d3b588ef6bd7e69b3c1bb821ab48fb43b4685ae2d8cab92957dac3998bbc5517"
+  }
+]

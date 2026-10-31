@@ -10,6 +10,7 @@
   "crossBrowserBackupRestore": true,
   "injuryReserveUI": true,
   "cityDepthCharts": true,
+  "realPlayerIdentities": true,
   "weeklyAndYearlyRecaps": true,
   "continuationRetainsHistory": true,
   "newUniverseRegeneratesPlayers": true,
